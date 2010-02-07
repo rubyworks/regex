@@ -1,0 +1,5 @@
+#! /usr/bin/ruby
+
+load 'exacto.rb'
+
+GinsuCommand.start

@@ -1,0 +1,45 @@
+= Regex ("Like a Knife")
+
+* home: http://proutils.github.com/regex
+* work: http://github.com/proutils/regex
+
+== DESCRIPTION
+
+Yea, I know what you are going to say. "I can do that with ___" Fill in the blank
+with +grep+, +awk+, +sed+, +perl+, etc. But honestly, none of these tools are
+Langauge 2.0 (read "post-Ruby"). What I want is a simaple commandline tool that
+given me quick access to a Regular Expression engine. No more, no less.
+
+Now I could have written this too in Perl. I'm sure it would just as good, if not
+better since Perl's Regualar Expression engine rocks, or so I hear. But Ruby's is
+pretty good too, and getting better (with 1.9+). And since I know Ruby very
+well. Well that's waht you get.
+
+== USAGE
+
+Okay, check it out. It's real simple. Supply a regular expression and a file to
+match upon to the +regex+ command.
+
+  $ regex '=begin.*?\n(.*)=end' sample.txt
+
+It does exactly what you think it would.
+
+Check out the <tt>--help</tt> and I'm sure the rest will come to you real quick.
+But it you want more information, then do us the good favor of jumping over
+to the <a href="http://proutils.github.com/regex">documentation wiki</a>.
+
+== STATUS
+
+This is a very release. So don't expect every feature under the sun just yet, or
+that every detail is going to work peachy keen. But hey, if something needs fixing
+or a feature needs adding, well then get in there and send me a patch --open
+source software is built on *TEAM WORK*.
+
+And expect a potenial for rapid change here at the beginning.
+
+== COPYRIGHT
+
+Copyright (c) 2010 Thomas Sawyer
+
+Regex is licensed under the terms of the MIT license.
+

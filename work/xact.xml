@@ -1,0 +1,160 @@
+
+<img style="padding: 0 10px; float: right;" src="../images/xact.png" />
+
+<h1>Xact</h1>
+
+<p style="color: red"> IMPORTANT Xact is still in early stages of development. Becuase of this
+the following documentation might not refect the actualy state of functionailty.</p>
+
+<p>The <code>xact</code> command is a simple tool that allows the extraction of content from
+a text file given a set of <i>textual cooridantes</i>. Texual cooridinate is just a fancy way
+of saying start and end line numbers or matching regular expressions. Besides extraction,
+<code>xact</code> also allows iteration through a whole set of matches.</p>
+
+<p>Lets try a simple example file godel.txt. The file's contents read like this:</p>
+
+  <pre>
+    Hello World!
+    Today we are leaning to use Xact.
+    Lets try a simple example file:
+        $ xact /^Lets.*?$/ /^Er/ godel.txt
+    Which outputs:
+        $ xact /^Lets.*?$/ /^Er/ godel.txt
+        ...
+    Er, well. there's no beating Godel!
+  </pre>
+
+<p>Don't be alarmed. If we simply pull a Bertrand, and actually did something <i>possible</i></p>
+
+  <pre>
+    $ xact /^Lets.*?$/ /^Which/ godel.txt
+  </pre>
+
+<p>Which outputs</p>
+
+  <pre>
+    $ xact /^Lets.*?$/ /^Er/ godel.txt
+  </pre>
+
+<p>Certainly, it make sense! ;)</p>
+
+<!--
+
+<h2>xact -ruby</h2>
+
+<p>Xact also some supports specialize modes. This provides some convenient defaults and post-processing
+for passing ouput to other particular commands. Currenly Xact only supports one mode,
+<code>-ruby</code>.</p>
+
+<p>The comment extracter and ruby extract runner can extract specific
+<code>==begin {label} ... ==end comments</code> from a script and run them as a
+stand-alone program that depends on the original script. By default it looks
+for comments labeled 'test'. So it is very good for running tests embedded
+directly into source code, but can also be used for other code snippets too.</p>
+
+<p>Here is an example script.</p>
+
+  <pre>
+    module Enumerable
+
+      # Like #map/#collect, but it generates
+      # a Hash.  The block is expected to return two values:
+      # the key and the value for the new hash.
+      #
+      #   numbers  = (1..3)
+      #   squares  = numbers.graph { |n| [n, n*n] }   # { 1=>1, 2=>4, 3=>9 }
+      #   sq_roots = numbers.graph { |n| [n*n, n] }   # { 1=>1, 4=>2, 9=>3 }
+      #
+
+      def graph(&amp;yld)
+        if yld
+          inject({}) do |h,kv|
+            nk, nv = yld[*kv]
+            h[nk] = nv
+            h
+          end
+        else
+          Hash[*self.to_a.flatten]
+        end
+      end
+
+    end
+
+    #
+    # TEST
+    #
+
+    =begin test
+
+      require 'test/unit'
+
+      class TestEnumerable &lt; Test::Unit::TestCase
+
+        def test_graph
+          numbers  = (1..3)
+          squares  = numbers.graph{ |n| [n, n*n] }
+          assert_equal( {1=>1, 2=>4, 3=>9}, squares )
+          sq_roots = numbers.graph{ |n| [n*n, n] }
+          assert_equal( {1=>1, 4=>2, 9=>3}, sq_roots )
+        end
+
+      end
+
+    =end
+  </pre>
+
+<p>Running this through xact-ruby...</p>
+
+  <pre>
+    $ xact-ruby graph.rb
+  </pre>
+
+<p>Produces the expected output...</p>
+
+  <pre>
+    Loaded suite -
+    Started
+    .
+    Finished in 0.00094 seconds.
+
+    1 tests, 2 assertions, 0 failures, 0 errors
+  </pre>
+
+<p>Since xact-ruby re-routes the extracted code thru ruby, all the standard ruby command-line options
+are still available:</p>
+
+  <pre>
+    $ xact-ruby -help
+    Usage: xact-ruby [switches] [-] [programfile] [arguments]
+      -0[octal]       specify record separator (\0, if no argument)
+      -a              autosplit mode with -n or -p (splits $_ into $F)
+      -c              check syntax only
+      -Cdirectory     cd to directory, before executing your script
+      -d              set debugging flags (set $DEBUG to true)
+      -e 'command'    one line of script. Several -e's allowed. Omit [programfile]
+      -Fpattern       split() pattern for autosplit (-a)
+      -i[extension]   edit ARGV files in place (make backup if extension supplied)
+      -Idirectory     specify $LOAD_PATH directory (may be used more than once)
+      -Kkcode         specifies KANJI (Japanese) code-set
+      -l              enable line ending processing
+      -n              assume 'while gets(); ... end' loop around your script
+      -p              assume loop like -n but print line also like sed
+      -rlibrary       require the library, before executing your script
+      -s              enable some switch parsing for switches after script name
+      -S              look for the script using PATH environment variable
+      -T[level]       turn on tainting checks
+      -v              print version number, then turn on verbose mode
+      -w              turn warnings on for your script
+      -W[level]       set warning level; 0=silence, 1=medium, 2=verbose (default)
+      -x[directory]   strip off text before #!ruby line and perhaps cd to directory
+      -copyright     print the copyright
+      -version       print the version
+
+      -h              handle of comment block to run
+      -P              display the code block that would be run
+  </pre>
+
+<p>Notice only the last two are new.</p>
+
+-->
+
