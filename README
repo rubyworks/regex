@@ -1,4 +1,6 @@
-= Regex ("Like a Knife")
+= Regex
+
+("Like a Knife")
 
 * home: http://proutils.github.com/regex
 * work: http://github.com/proutils/regex
@@ -20,20 +22,34 @@ well. Well that's waht you get.
 Okay, check it out. It's real simple. Supply a regular expression and a file to
 match upon to the +regex+ command.
 
-  $ regex '=begin.*?\n(.*)=end' sample.txt
+  $ regex '=begin.*?\n(.*)\n=end' sample.rb
 
-It does exactly what you think it would.
+It does exactly what you would expect -- returns the content between the first
+<tt>=begin...=end</tt> clause it comes across. To see all such comments, you can use
+the repeat options.
 
-Check out the <tt>--help</tt> and I'm sure the rest will come to you real quick.
+  $ regex --repeat '=begin.*?\n(.*)\n=end' sample.rb
+
+By default +regex+ produces string output. Regular expression groups are delimited
+by ASCII 29 (035 1D) END OF GROUP, and repeat matches are delimited by
+ASCII character 30 (036 1E) END OF RECORD.
+
+Instead of string output, +regex+ also support YAML and JSON output.
+
+  $ regex --yaml --repeat '=begin.*?\n(.*)\n=end' sample.rb
+
+In this case the returned matches are delimited using an Array of Arrays.
+
+Check out the <tt>--help</tt> and I am sure the rest will come to you real quick.
 But it you want more information, then do us the good favor of jumping over
-to the <a href="http://proutils.github.com/regex">documentation wiki</a>.
+to the wiki[http://proutils.github.com/regex].
 
 == STATUS
 
-This is a very release. So don't expect every feature under the sun just yet, or
-that every detail is going to work peachy keen. But hey, if something needs fixing
-or a feature needs adding, well then get in there and send me a patch --open
-source software is built on *TEAM WORK*.
+This is a very early release. So don't expect every feature under the sun just yet,
+or that every detail is going to work peachy keen. But hey, if something needs fixing
+or a feature needs adding, well then get in there and send me a patch. Open
+source software is built on *TEAM WORK*, baby.
 
 And expect a potenial for rapid change here at the beginning.
 
