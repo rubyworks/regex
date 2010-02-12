@@ -10,9 +10,6 @@ class Regex
     attr :file
 
     #
-    attr :text
-
-    #
     attr :format
 
     #
@@ -26,7 +23,6 @@ class Regex
     # New Command.
     def initialize(*argv)
       @file    = nil
-      @text    = nil
       @format  = nil
       @options = {}
       parse(*argv)
@@ -44,8 +40,6 @@ class Regex
           puts "No such file -- '#{file}'."
           exit 1
         end
-      else
-        @text = ARGF.read
       end
     end
 
@@ -91,7 +85,8 @@ class Regex
 
     #
     def extraction
-      Regex.load(file, options){ text }
+      target = file ? File.new(file) : ARGF
+      Regex.new(target, options)
     end
 
     # Extract and display.
