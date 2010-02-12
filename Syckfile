@@ -43,8 +43,8 @@ syntax:
 rdoc:
   service  : RDoc
   template : redfish
-  include  : [ lib, README.rdoc, LICENSE ]
-  exclude  : [ "lib/dnote/templates" ]
+  include  : [ lib, README, LICENSE ]
+  exclude  : [ Syckfile ]
   main     : ~
   extra    : ~
   active   : true
