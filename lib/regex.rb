@@ -113,9 +113,9 @@ class Regex
       out = structure
       if repeat
         out = out.map{ |m| m.join(deliminator_group) }
-        out.join(deliminator_record) #.chomp("\n") + "\n"
+        out = out.join(deliminator_record) #.chomp("\n") + "\n"
       else
-        out.join(deliminator_group) #.chomp("\n") + "\n"
+        out = out.join(deliminator_group) #.chomp("\n") + "\n"
       end
       out
     end

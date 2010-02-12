@@ -91,7 +91,15 @@ class Regex
 
     # Extract and display.
     def main
-      puts extraction.to_s(@format)
+      begin
+        puts extraction.to_s(@format)
+      rescue => error
+        if $DEBUG
+          raise error
+        else
+          abort error.to_s
+        end
+      end
     end
 
   end
