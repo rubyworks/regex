@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<HTML>
+<HEAD>
+  <TITLE>Regex</TITLE>
+
+  <LINK rel="shortcut icon" href="assets/images/ruby.png"/>
+
+  <LINK type="text/css" rel="stylesheet" href="assets/styles/reset.css" />
+  <LINK type="text/css" rel="stylesheet" href="assets/styles/tag.css" />
+  <LINK type="text/css" rel="stylesheet" href="assets/styles/id.css" />
+  <LINK type="text/css" rel="stylesheet" href="assets/styles/class.css" />
+
+  <SCRIPT language="javascript" type="text/javascript" src="assets/scripts/jquery.js"></SCRIPT>
+  <SCRIPT language="javascript" type="text/javascript" src="assets/scripts/highlight.js"></SCRIPT>
+
+  <SCRIPT type="text/javascript">
+    $(document).ready(function() {
+      $('pre').wrapInner('<code></code>');
+      hljs.tabReplace = '    ';
+      hljs.initHighlightingOnLoad('ruby');
+    });
+  </SCRIPT>
+
+  <LINK type="text/css" rel="stylesheet" href="assets/styles/highlight.css" />
+</HEAD>
+<BODY>
+
+<div class="main">
+
+  <table>
+  <tr><td colspan="2">
+    <div id="header">
+      <img src="assets/images/logo.png" align="right" style="margin: 20px 10px;" />
+      <div class="title">
+        <br/>
+        <h1><span style="color: purple;">Reg</span><span style="color: orange;">Ex</span></h1>
+      </div>
+    </div>
+  </td></tr>
+
+  <tr><td style="width: 50%;">
+    <div id="description">
+      Regex is a simple commmandline Regular Expression tool that
+      makes it all too easy to search text documents for content.
+      <br/><br/>
+      <a href="#" onclick="$('#readme').toggle();">[Toggle README]</div>
+    </div>
+  </td><td>
+    <div id="nav">
+      <ul>
+        <li><a href="http://wiki.github.com/proutils/regex/">Documentation</a></li>
+        <li><a href="http://groups.google.com/group/proutils/topics?hl=en">Mailing List</a></li>
+        <li><a href="http://github.com/proutils/regex/downloads/">Download</a></li>
+        <li><a href="http://github.com/proutils/regex/">Development</a></li>
+      </ul>
+    </div>
+  </td></tr>
+  </table>
+
+  <div id="readme" style="display: none;">
+    <div class="section" id="section_description"><h2>DESCRIPTION</h2>
+<p>
+Yea, I know what you are going to say. &#8220;I can do that with
+<em>_</em>&#8220; Fill in the blank with <tt>grep</tt>, <tt>awk</tt>,
+<tt>sed</tt>, <tt>perl</tt>, etc. But honestly, none of these tools are
+Langauge 2.0 (read &#8220;post-Ruby&#8221;). What I want is a simaple
+commandline tool that given me quick access to a Regular Expression engine.
+No more, no less.
+</p>
+<p>
+Now I could have written this too in Perl. I&#8217;m sure it would just as
+good, if not better since Perl&#8217;s Regualar Expression engine rocks, or
+so I hear. But Ruby&#8217;s is pretty good too, and getting better (with
+1.9+). And since I know Ruby very well. Well that&#8217;s waht you get.
+</p>
+</div><div class="section" id="section_usage"><h2>USAGE</h2>
+<p>
+Okay, check it out. It&#8217;s real simple. Supply a regular expression and
+a file to match upon to the <tt>regex</tt> command.
+</p>
+<pre>
+  $ regex '=begin.*?\n(.*)\n=end' sample.rb
+</pre>
+<p>
+It does exactly what you would expect &#8212; returns the content between
+the first <tt>=begin...=end</tt> clause it comes across. To see all such
+comments, you can use the repeat options.
+</p>
+<pre>
+  $ regex --repeat '=begin.*?\n(.*)\n=end' sample.rb
+</pre>
+<p>
+By default <tt>regex</tt> produces string output. Regular expression groups
+are delimited by ASCII 29 (035 1D) END OF GROUP, and repeat matches are
+delimited by ASCII character 30 (036 1E) END OF RECORD.
+</p>
+<p>
+Instead of string output, <tt>regex</tt> also support YAML and JSON output.
+</p>
+<pre>
+  $ regex --yaml --repeat '=begin.*?\n(.*)\n=end' sample.rb
+</pre>
+<p>
+In this case the returned matches are delimited using an Array of Arrays.
+</p>
+<p>
+Check out the <tt>--help</tt> and I am sure the rest will come to you real
+quick. But it you want more information, then do us the good favor of
+jumping over to the <a href="http://proutils.github.com/regex">wiki</a>.
+</p>
+</div><div class="section" id="section_status"><h2>STATUS</h2>
+<p>
+This is a very early release. So don&#8217;t expect every feature under the
+sun just yet, or that every detail is going to work peachy keen. But hey,
+if something needs fixing or a feature needs adding, well then get in there
+and send me a patch. Open source software is built on *TEAM WORK*, baby.
+</p>
+<p>
+And expect a potenial for rapid change here at the beginning.
+</p>
+</div><div class="section" id="section_copyright"><h2>COPYRIGHT</h2>
+<p>
+Copyright &#169; 2010 Thomas Sawyer
+</p>
+<p>
+Regex is licensed under the terms of the MIT license.
+</p>
+</div>
+  </div>
+
+</div>
+
+<div id="footer">
+  <div class="advert">
+    <script type="text/javascript"><!--
+google_ad_client = "pub-1126154564663472";
+/* RUBYWORKS 09-10-02 728x90 */
+google_ad_slot = "0788888658";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+
+  </div>
+  <div class="copyright">
+    Copyright &copy; 2010 - Web design generated by <a href="http://proutils.github.com/webme">webme<a/> -t splash.<br/>
+  </div>
+</div>
+
+</BODY>
+</HTML>
+
+<!-- WebMe Copyright (c) 2009 Thomas Sawyer -->
+

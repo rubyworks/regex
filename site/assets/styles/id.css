@@ -1,0 +1,46 @@
+/* #main */
+
+.main { width: 736px; margin: 0 auto; padding: 0px; }
+.main a { font-size: 100%; }
+.main a:hover { text-decoration: underline; }
+.main h2 { font-size: 2em; font-weight: bold; }
+.main h3 { font-style: italic;}
+
+/* #header */
+
+#header { margin-bottom: 50px; }
+#header .title { padding: 10px 0; font-size: 20px; }
+#header .title h1 { font-size: 100px; font-weight: bold; margin-left: -7px; }
+#header .title pre { background: transparent; }
+#header .title h1 { color: #cc0000; }
+
+/* #nav */
+
+#nav { padding: 0 0 0 15px; }
+
+#nav { text-align: left; }
+#nav ul { list-style-type: none; margin: 0px; padding: 0px; width: 100%; position: relative; background: transparent; }
+#nav ul li { margin: 12px 10px 10px 0; line-height: 20px; }
+#nav ul li a { border-top: 0 solid; color: #333; }
+
+#nav { text-align: right; }
+#nav ul li a { font-family: sans-serif; font-weight: bold; text-decoration: none; font-size: 30px; }
+#nav ul li a:hover { color: white; }
+#nav ul li a:active { text-decoration: none; }
+
+/* description */
+
+#description { font-family: sans-serif; font-weight: bold; line-height: 160%; padding: 0; margin: 0; }
+
+/* readme */
+
+#readme { margin-top: 50px; padding: 20px 20px; border: 1px solid #999; -moz-border-radius: 10px; -webkit-border-radius: 10px; }
+#readme p { font-weight: normal; font-size: 12px; }
+
+/* #footer */
+
+#footer { margin-top: 100px; }
+#footer .advert { width: 720px; margin: 0 auto; }
+#footer .copyright { width: 720px; margin: 0 auto; margin-top: 20px; padding: 20px 0px 35px 0px; color: #333333; }
+#footer .copyright { font: bold .8em sans-serif; }
+
