@@ -58,7 +58,7 @@ class Regex
 
   # New extractor.
   def initialize(io, options={})
-    @raw     = io.read
+    @raw = (String === io ? io : io.read)
     options.each do |k,v|
       __send__("#{k}=", v)
     end
