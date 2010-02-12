@@ -48,6 +48,12 @@ class Regex
   # Repeat Match.
   attr_accessor :repeat
 
+  # Output format.
+  attr_accessor :format
+
+  #
+  #attr_reader :match
+
   #
   def self.load(file, options={}, &block)
     new(open(file), options, &block)
@@ -98,11 +104,64 @@ class Regex
   end
 
   #
-  def to_s
-    if out = extract
-      out.chomp("\n") + "\n"
+  def to_s(format=nil)
+    case format
+    when :yaml
+      to_s_yaml
+    when :json
+      to_s_json
     else
-      ''
+      out = structure
+      if repeat
+        out = out.map{ |m| m.join(deliminator_group) }
+        out.join(deliminator_record) #.chomp("\n") + "\n"
+      else
+        out.join(deliminator_group) #.chomp("\n") + "\n"
+      end
+      out
+    end
+  end
+
+  #
+  def to_s_yaml
+    require 'yaml'
+    structure.to_yaml
+  end
+
+  #
+  def to_s_json
+    begin
+      require 'json'
+    rescue LoadError
+      require 'json_pure' 
+    end
+    structure.to_json
+  end
+
+  #
+  def structure
+    repeat ? structure_repeat : structure_single
+  end
+
+  #
+  def structure_single
+    md = extract
+    if index
+      [md[index]]
+    elsif md.size > 1
+      md[1..-1]
+    else
+      [md[0]]
+    end
+  end
+
+  #
+  def structure_repeat
+    out = extract
+    if index
+      out.map{ |md| [md[index]] }
+    else
+      out.map{ |md| md.size > 1 ? md[1..-1] : [md[0]] }
     end
   end
 
@@ -116,17 +175,24 @@ class Regex
   end
 
   #
+  #def extract_single
+  #  out = []
+  #  if md = matchdata
+  #    if index
+  #      out << md[index]
+  #    elsif md.size > 1
+  #      out = md[1..-1] #.join(deliminator_group)
+  #    else
+  #      out = md
+  #    end
+  #  end
+  #  return out
+  #end
+
+  #
   def extract_single
-    if md = matchdata
-      if index
-        out = md[index]
-      elsif md.size > 1
-        out = md[1..-1].join(deliminator_group)
-      else
-        out = md
-      end
-    end
-    return out
+    md = regex.match(text)
+    md ? md : []
   end
 
   #
@@ -135,19 +201,28 @@ class Regex
   end
 
   #
+  #def extract_repeat
+  #  out = []
+  #  text.scan(regex) do
+  #    md = $~
+  #    if index
+  #      out << [md[index]]
+  #    elsif md.size > 1
+  #      out << md[1..-1] #.join(deliminator_group)
+  #    else
+  #      out << md
+  #    end      
+  #  end
+  #  out #.join(deliminator_record)
+  #end
+
+  #
   def extract_repeat
     out = []
     text.scan(regex) do
-      md = $~
-      if index
-        out << md[index]
-      elsif md.size > 1
-        out << md[1..-1].join(deliminator_group)
-      else
-        out << md
-      end      
+      out << $~
     end
-    out.join(deliminator_record)
+    out
   end
 
   def deliminator_group
