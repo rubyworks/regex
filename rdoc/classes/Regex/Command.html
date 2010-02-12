@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Class: Regex::Command</title>
+
+  
+    <link rel="SHORTCUT ICON" href="../../assets/icon/class.png">
+  
+
+  <link type="text/css" rel="stylesheet" href="../../assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="../../assets/highlight/styles/github.css" title="GitHub" />
+
+  <script type="text/javascript" charset="utf-8" src="../../assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      hookHighlightSyntax();
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind("click", highlightClickTarget);
+    });
+  </script>
+</head>
+<body class="class">
+<div id="main">
+
+  <div class="head">
+    <h1>
+      
+        <img src="../../assets/icon/class.png" align="absmiddle">&nbsp;
+      
+      <a href="../../index.html">Regex</a>&nbsp;
+      <a href="/">Regex::Command</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li class="file"><a href="../../files/lib/regex/command_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/regex/command.rb">lib/regex/command.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      <!-- What about Git info, or Hg info? This seems almost silly, albeit kind of cool. -->
+      <!-- TODO: generalize this for all SCMs -->
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        <ul>
+          
+          <li class="class">Object</li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+            
+            <li class="singleton">
+              <a href="#M000000">::main</a>
+            </li>
+          
+            
+            <li class="singleton">
+              <a href="#M000001">::new</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000008">#extraction</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000010">#main</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000002">#parse</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000004">#parser</a>
+            </li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Information</h3>
+        <ul>
+        
+          <li class="file"><a href="../../files/LICENSE.html">LICENSE</a></li>
+        
+          <li class="file"><a href="../../files/README.html">README</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="../../assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <!-- classpage.html : classes -->
+        <ul class="link-list">
+        
+          <li class="class"><a href="../../classes/Regex.html">Regex</a></li>
+        
+          <li class="class"><a href="../../classes/Regex/Command.html">Regex::Command</a></li>
+        
+          <li class="module"><a href="../../classes/Regex/String.html">Regex::String</a></li>
+        
+          <li class="module"><a href="../../classes/Regex/TEMPLATES.html">Regex::TEMPLATES</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+    </div>
+
+    <div id="validator-badges">
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="../../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://github.com/proutils/webri">WebRI Redfish</a> 1.1
+      <br/><br/>
+    </div>
+  </div>
+
+  <div id="documentation">
+
+    <div id="description">
+      
+        <h1>Command</h1>
+      
+
+      <p>
+Commandline interface.
+</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+
+    <!-- Attributes -->
+    
+    <div id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="file-attribute-method" class="method-detail">
+        <a name="file"></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">file</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="format-attribute-method" class="method-detail">
+        <a name="format"></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">format</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="options-attribute-method" class="method-detail">
+        <a name="options"></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">options</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- Methods -->
+    
+    <div id="public-class-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="main-method" class="method-detail ">
+        <a name="M000000"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">main</span><span
+            class="method-args">(*argv)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="main-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/regex/command.rb, line 19</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">main</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">argv</span>)
+      <span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">argv</span>).<span class="ruby-identifier">main</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="new-method" class="method-detail ">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">new</span><span
+            class="method-args">(*argv)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+New <a href="Command.html">Command</a>.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="new-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/regex/command.rb, line 24</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">argv</span>)
+      <span class="ruby-ivar">@file</span>    = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-ivar">@format</span>  = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-ivar">@options</span> = {}
+      <span class="ruby-identifier">parse</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">argv</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="public-instance-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="extraction-method" class="method-detail ">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">extraction</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="extraction-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/regex/command.rb, line 87</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">extraction</span>
+      <span class="ruby-identifier">target</span> = <span class="ruby-identifier">file</span> <span class="ruby-value">? </span><span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">ARGF</span>
+      <span class="ruby-constant">Regex</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="main-method" class="method-detail ">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">main</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Extract and display.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="main-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/regex/command.rb, line 93</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">main</span>
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">extraction</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-ivar">@format</span>)
+      <span class="ruby-keyword kw">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$DEBUG</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-identifier">error</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">abort</span> <span class="ruby-identifier">error</span>.<span class="ruby-identifier">to_s</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="parse-method" class="method-detail ">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">parse</span><span
+            class="method-args">(*argv)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="parse-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/regex/command.rb, line 32</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">argv</span>)
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">argv</span>)
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:template</span>]
+        <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:pattern</span>] = <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">shift</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@file</span> = <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">shift</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@file</span>
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-ivar">@file</span>)
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;No such file -- '#{file}'.&quot;</span>
+          <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="parser-method" class="method-detail ">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">parser</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+OptionParser instance.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="parser-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/regex/command.rb, line 47</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parser</span>
+      <span class="ruby-identifier">require</span> <span class="ruby-value str">'optparse'</span>
+      <span class="ruby-ivar">@options</span> = {}
+      <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'--template'</span>, <span class="ruby-value str">'-t NAME'</span>, <span class="ruby-value str">&quot;select a built-in regular expression&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+          <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:template</span>] = <span class="ruby-identifier">name</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'--index'</span>, <span class="ruby-value str">'-n INT'</span>, <span class="ruby-value str">&quot;return a specific match index&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">int</span><span class="ruby-operator">|</span>
+          <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:index</span>] = <span class="ruby-identifier">int</span>.<span class="ruby-identifier">to_i</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'--insensitive'</span>, <span class="ruby-value str">'-i'</span>, <span class="ruby-value str">&quot;case insensitive matching&quot;</span>) <span class="ruby-keyword kw">do</span>
+          <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:insensitive</span>] = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'--unxml'</span>, <span class="ruby-value str">'-x'</span>, <span class="ruby-value str">&quot;ignore XML/HTML tags&quot;</span>) <span class="ruby-keyword kw">do</span>
+          <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:unxml</span>] = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'--repeat'</span>, <span class="ruby-value str">'-r'</span>, <span class="ruby-value str">&quot;find all matching occurances&quot;</span>) <span class="ruby-keyword kw">do</span>
+          <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:repeat</span>] = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'--yaml'</span>, <span class="ruby-value str">'-y'</span>, <span class="ruby-value str">&quot;output in YAML format&quot;</span>) <span class="ruby-keyword kw">do</span>
+          <span class="ruby-ivar">@format</span> = <span class="ruby-identifier">:yaml</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'--json'</span>, <span class="ruby-value str">'-j'</span>, <span class="ruby-value str">&quot;output in JSON format&quot;</span>) <span class="ruby-keyword kw">do</span>
+          <span class="ruby-ivar">@format</span> = <span class="ruby-identifier">:json</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on_tail</span>(<span class="ruby-value str">'--help'</span>, <span class="ruby-value str">'-h'</span>, <span class="ruby-value str">&quot;display this lovely help message&quot;</span>) <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-identifier">opt</span>
+          <span class="ruby-identifier">exit</span> <span class="ruby-value">0</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+
+  <div id="rdoc-debugging-section-dump" class="debugging-section">
+  
+    <p>Disabled; run with --debug to generate this.</p>
+  
+  </div>
+
+</main>
+</body>
+</html>
+

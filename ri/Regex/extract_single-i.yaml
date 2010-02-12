@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Extract single match from source text.
+full_name: Regex#extract_single
+is_singleton: false
+name: extract_single
+params: ()
+visibility: public

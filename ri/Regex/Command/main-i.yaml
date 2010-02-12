@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Extract and display.
+full_name: Regex::Command#main
+is_singleton: false
+name: main
+params: ()
+visibility: public

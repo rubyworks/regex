@@ -1,0 +1,106 @@
+--- !ruby/object:RDoc::RI::ClassDescription 
+attributes: 
+- !ruby/object:RDoc::RI::Attribute 
+  comment: 
+  - !ruby/struct:RDoc::Markup::Flow::P 
+    body: Output format.
+  name: format
+  rw: RW
+- !ruby/object:RDoc::RI::Attribute 
+  comment: 
+  - !ruby/struct:RDoc::Markup::Flow::P 
+    body: Index of expression return.
+  name: index
+  rw: RW
+- !ruby/object:RDoc::RI::Attribute 
+  comment: 
+  - !ruby/struct:RDoc::Markup::Flow::P 
+    body: Ignore case.
+  name: insensitive
+  rw: RW
+- !ruby/object:RDoc::RI::Attribute 
+  comment: 
+  - !ruby/struct:RDoc::Markup::Flow::P 
+    body: Regular expression.
+  name: pattern
+  rw: RW
+- !ruby/object:RDoc::RI::Attribute 
+  comment: 
+  - !ruby/struct:RDoc::Markup::Flow::P 
+    body: Repeat Match.
+  name: repeat
+  rw: RW
+- !ruby/object:RDoc::RI::Attribute 
+  comment: 
+  - !ruby/struct:RDoc::Markup::Flow::P 
+    body: Select built-in regular expression by name.
+  name: template
+  rw: RW
+- !ruby/object:RDoc::RI::Attribute 
+  comment: 
+  - !ruby/struct:RDoc::Markup::Flow::P 
+    body: Remove XML tags from search.
+  name: unxml
+  rw: RW
+class_methods: 
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::H 
+  level: 1
+  text: Text Extraction Class
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Extractor is was designed particulalry for extracting source code from embedded comment blocks.
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: "Todo:"
+- !ruby/struct:RDoc::Markup::Flow::VERB 
+  body: "  - How can we handle embedded code in stadanrd comments? Eg. #\n"
+constants: 
+- !ruby/object:RDoc::RI::Constant 
+  comment: 
+  name: VERSION
+  value: "\"1.1\""
+- !ruby/object:RDoc::RI::Constant 
+  comment: 
+  - !ruby/struct:RDoc::Markup::Flow::P 
+    body: When the regular expression return multiple groups, each is divided by the group deliminator. This is the default value.
+  name: DELIMINATOR_GROUP
+  value: 29.chr + "\n"
+- !ruby/object:RDoc::RI::Constant 
+  comment: 
+  - !ruby/struct:RDoc::Markup::Flow::P 
+    body: When using repeat mode, each match is divided by the record deliminator. This is the default value.
+  name: DELIMINATOR_RECORD
+  value: 30.chr + "\n"
+full_name: Regex
+includes: []
+
+instance_methods: 
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: deliminator_group
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: deliminator_record
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: extract
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: extract_repeat
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: extract_single
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: regex
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: structure
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: structure_repeat
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: structure_single
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: text
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: to_s
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: to_s_json
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: to_s_yaml
+name: Regex
+superclass: Object

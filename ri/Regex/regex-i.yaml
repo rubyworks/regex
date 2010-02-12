@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Regex#regex
+is_singleton: false
+name: regex
+params: ()
+visibility: public
