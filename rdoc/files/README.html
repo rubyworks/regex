@@ -46,7 +46,7 @@
       <h3 class="section-header">File Stats</h3>
       <dl>
         <dt class="modified-date">Last Modified</dt>
-        <dd class="modified-date">Fri Feb 12 13:28:58 -0500 2010</dd>
+        <dd class="modified-date">Sat Feb 13 00:14:13 -0500 2010</dd>
 
         
 
@@ -164,7 +164,7 @@
             
             <li class="method" style="clear: both;">
               <span class="method-parent-aside">Regex::Command</span>
-              <a href="classes/Regex/Command.html#M000010">#main</a>
+              <a href="classes/Regex/Command.html#M000009">#main</a>
             </li>
           
             
@@ -236,7 +236,7 @@
             
             <li class="method" style="clear: both;">
               <span class="method-parent-aside">Regex</span>
-              <a href="classes/Regex.html#M000009">#to_s_yaml</a>
+              <a href="classes/Regex.html#M000010">#to_s_yaml</a>
             </li>
           
         </ul>
@@ -282,30 +282,31 @@ href="http://github.com/proutils/regex">github.com/proutils/regex</a>
 <h2>DESCRIPTION</h2>
 <p>
 Yea, I know what you are going to say. &#8220;I can do that with
-<em>_</em>&#8220; Fill in the blank with <tt>grep</tt>, <tt>awk</tt>,
+<em>__</em>&#8220; Fill in the blank with <tt>grep</tt>, <tt>awk</tt>,
 <tt>sed</tt>, <tt>perl</tt>, etc. But honestly, none of these tools are
-Langauge 2.0 (read &#8220;post-Ruby&#8221;). What I want is a simaple
-commandline tool that given me quick access to a Regular Expression engine.
-No more, no less.
+&#8220;Langauge 2.0&#8220; (read &#8220;post-Ruby&#8221;). What I want is a
+simple command-line tool that gives me quick access to a Regular Expression
+engine. No more, no less.
 </p>
 <p>
-Now I could have written this too in Perl. I&#8217;m sure it would just as
+Now I could have written this in Perl. I&#8217;m sure it would just as
 good, if not better since Perl&#8217;s Regualar Expression engine rocks, or
-so I hear. But Ruby&#8217;s is pretty good too, and getting better (with
-1.9+). And since I know Ruby very well. Well that&#8217;s waht you get.
+so I hear. But Ruby&#8217;s is pretty damn good too, and getting better
+(with 1.9+). And since I know Ruby very well. Well that&#8217;s what you
+get.
 </p>
 <h2>USAGE</h2>
 <p>
 Okay, check it out. It&#8217;s real simple. Supply a regular expression and
-a file to match upon to the <tt>regex</tt> command.
+a file to be searched to the <tt>regex</tt> command.
 </p>
 <pre>
   $ regex '=begin.*?\n(.*)\n=end' sample.rb
 </pre>
 <p>
-It does exactly what you would expect &#8212; returns the content between
-the first <tt>=begin...=end</tt> clause it comes across. To see all such
-comments, you can use the repeat options.
+It does exactly what you would expect &#8212;returns the content between
+the first <tt>=begin ... =end</tt> clause it comes across. To see all such
+comments, you can use the <tt>--repeat</tt> option.
 </p>
 <pre>
   $ regex --repeat '=begin.*?\n(.*)\n=end' sample.rb
@@ -316,24 +317,27 @@ are delimited by ASCII 29 (035 1D) END OF GROUP, and repeat matches are
 delimited by ASCII character 30 (036 1E) END OF RECORD.
 </p>
 <p>
-Instead of string output, <tt>regex</tt> also support YAML and JSON output.
+Instead of string output, <tt>regex</tt> also supports YAML and JSON
+formats. E.g.
 </p>
 <pre>
   $ regex --yaml --repeat '=begin.*?\n(.*)\n=end' sample.rb
 </pre>
 <p>
-In this case the returned matches are delimited using an Array of Arrays.
+In this case the returned matches are delimited using as an array of
+arrays.
 </p>
 <p>
-Check out the <tt>--help</tt> and I am sure the rest will come to you real
-quick. But it you want more information, then do us the good favor of
-jumping over to the <a href="http://proutils.github.com/regex">wiki</a>.
+Check out the <tt>--help</tt> and I am sure the rest will be smooth
+sailing. But it you want more information, then do us the good favor of
+jumping over to the <a
+href="http://wiki.github.com/proutils/regex">wiki</a>.
 </p>
 <h2>STATUS</h2>
 <p>
 This is a very early release. So don&#8217;t expect every feature under the
-sun just yet, or that every detail is going to work peachy keen. But hey,
-if something needs fixing or a feature needs adding, well then get in there
+sun just yet, or that every detail is going to work peachy. But hey, if
+something needs fixing or a feature needs adding, well then get in there
 and send me a patch. Open source software is built on *TEAM WORK*, baby.
 </p>
 <p>
