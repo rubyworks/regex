@@ -7,26 +7,26 @@
 
 == DESCRIPTION
 
-Yea, I know what you are going to say. "I can do that with ___" Fill in the blank
+Yea, I know what you are going to say. "I can do that with ____" Fill in the blank
 with +grep+, +awk+, +sed+, +perl+, etc. But honestly, none of these tools are
-Langauge 2.0 (read "post-Ruby"). What I want is a simaple commandline tool that
-given me quick access to a Regular Expression engine. No more, no less.
+"Langauge 2.0" (read "post-Ruby"). What I want is a simple command-line tool that
+gives me quick access to a Regular Expression engine. No more, no less.
 
-Now I could have written this too in Perl. I'm sure it would just as good, if not
+Now I could have written this in Perl. I'm sure it would just as good, if not
 better since Perl's Regualar Expression engine rocks, or so I hear. But Ruby's is
-pretty good too, and getting better (with 1.9+). And since I know Ruby very
-well. Well that's waht you get.
+pretty damn good too, and getting better (with 1.9+). And since I know Ruby very
+well. Well that's what you get.
 
 == USAGE
 
 Okay, check it out. It's real simple. Supply a regular expression and a file to
-match upon to the +regex+ command.
+be searched to the +regex+ command.
 
   $ regex '=begin.*?\n(.*)\n=end' sample.rb
 
-It does exactly what you would expect -- returns the content between the first
-<tt>=begin...=end</tt> clause it comes across. To see all such comments, you can use
-the repeat options.
+It does exactly what you would expect --returns the content between the first
+<tt>=begin ... =end</tt> clause it comes across. To see all such comments, you can
+use the <tt>--repeat</tt> option.
 
   $ regex --repeat '=begin.*?\n(.*)\n=end' sample.rb
 
@@ -34,20 +34,20 @@ By default +regex+ produces string output. Regular expression groups are delimit
 by ASCII 29 (035 1D) END OF GROUP, and repeat matches are delimited by
 ASCII character 30 (036 1E) END OF RECORD.
 
-Instead of string output, +regex+ also support YAML and JSON output.
+Instead of string output, +regex+ also supports YAML and JSON formats. E.g.
 
   $ regex --yaml --repeat '=begin.*?\n(.*)\n=end' sample.rb
 
-In this case the returned matches are delimited using an Array of Arrays.
+In this case the returned matches are delimited using as an array of arrays.
 
-Check out the <tt>--help</tt> and I am sure the rest will come to you real quick.
+Check out the <tt>--help</tt> and I am sure the rest will be smooth sailing.
 But it you want more information, then do us the good favor of jumping over
-to the wiki[http://proutils.github.com/regex].
+to the wiki[http://wiki.github.com/proutils/regex].
 
 == STATUS
 
 This is a very early release. So don't expect every feature under the sun just yet,
-or that every detail is going to work peachy keen. But hey, if something needs fixing
+or that every detail is going to work peachy. But hey, if something needs fixing
 or a feature needs adding, well then get in there and send me a patch. Open
 source software is built on *TEAM WORK*, baby.
 
