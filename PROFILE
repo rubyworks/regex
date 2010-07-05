@@ -1,0 +1,20 @@
+--- 
+title  : Regex
+summary: Regex is a simple commmandline Regular Expression tool.
+created: 2006-05-09
+
+authors:
+  - Thomas Sawyer
+  - Tyler Rick
+
+description:
+  Regex is a simple commmandline Regular Expression tool,
+  that makes easy to search documents for content matches.
+
+resources:
+  homepage: http://proutils.github.com/regex
+  repository: git://github.com/proutils/regex.git
+  documentation: http://wiki.github.com/proutils/regex
+  development: http://github.com/proutils/regex
+  download: http://github.com/proutils/regex/downloads
+  mailinglist: http://groups.google.com/group/proutils/topics?hl=en
