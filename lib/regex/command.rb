@@ -1,4 +1,4 @@
-require 'regex'
+require 'regex/extrator'
 
 class Regex
 
