@@ -25,13 +25,7 @@ box:
   exclude: [Syckfile]
   master : true
 
-syntax:
-  service  : Syntax
-  loadpath : ~
-  exclude  : ~
-  active   : false
-
-#lemon:
+#qed:
 #  service  : lemon
 #  tests    : ~
 #  exclude  : ~
