@@ -1,0 +1,52 @@
+= Search and Replace
+
+Regex can also be used to do search and replace across multiple
+strings or IO objects, includeing files.
+
+  require 'regex'
+
+To perform search and replace procedure we create a Regex::Replacer object.
+The constructor method takes an Hash or an Associcative Array of replcement
+_rules_, of matching pattern and replacment pairs.
+
+  replacer = Regex::Replacer.new('World'=>'Planet Earth')
+
+We can always add new rule via the #rule method as well.
+
+  replacer.rule('!', '!!!')
+
+Rules are applied in the order they were defined --which is why you would
+use an associative array rather than a hash if order is important.
+
+Now, lets say we have the famous String.
+
+  string = "Hello, World!"
+
+We use the #apply method to actually perform the substitutions.
+
+  replacer.apply(string)
+
+The replacements occur in place. Since in this case we are performing
+the serach and replace on a String object, we can see the change 
+has taken place.
+
+  string.assert == "Hello, Planet Earth!!!"
+
+As we mentioned at the beginning, substitutions can be apllied to IO objects
+as well.
+
+  require 'stringio'
+
+  io = StringIO.new("Hello, World!")
+
+  replacer.apply(io)
+
+  io.read.assert == "Hello, Planet Earth!!!"
+
+If io object were a File object, rather than a StringIO, the file would
+be changed on disk. As a precaution a backup file is written to 
+a .backup/ directory in the same directory as the file. If need be the 
+backup option can be turned off.
+
+  replacer.backup = false
+
