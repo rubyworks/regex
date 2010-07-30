@@ -1,5 +1,0 @@
-=begin test
-  This is
-  a
-  test
-=end
