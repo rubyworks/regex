@@ -1,4 +1,4 @@
-class Regex
+module Regex
 
   # Extensions for String class.
   # These methods are taken directly from Ruby Facets.

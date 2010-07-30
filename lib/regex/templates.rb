@@ -1,4 +1,4 @@
-class Regex
+module Regex
 
   # = Templates
   #

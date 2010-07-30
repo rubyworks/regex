@@ -221,6 +221,60 @@ module Regex
       DELIMINATOR_RECORD
     end
 
+    # Commandline Interface to Extractor
+    def self.cli(argv=ARGV)
+      require 'optparse'
+      options = {}
+      parser = OptionParser.new do |opt|
+        opt.on('--template', '-t NAME', "select a built-in regular expression") do |name|
+          options[:template] = name
+        end
+        opt.on('--index', '-n INT', "return a specific match index") do |int|
+          options[:index] = int.to_i
+        end
+        opt.on('--insensitive', '-i', "case insensitive matching") do
+          options[:insensitive] = true
+        end
+        opt.on('--unxml', '-x', "ignore XML/HTML tags") do
+          options[:unxml] = true
+        end
+        opt.on('--global', '-g', "find all matching occurances") do
+          options[:repeat] = true
+        end
+        opt.on('--yaml', '-y', "output in YAML format") do
+          format = :yaml
+        end
+        opt.on('--json', '-j', "output in JSON format") do
+          format = :json
+        end
+        opt.on_tail('--debug', 'run in debug mode') do
+          $DEBUG = true
+        end
+        opt.on_tail('--help', '-h', "display this lovely help message") do
+          puts opt
+          exit 0
+        end
+      end
+      parser.parse!(argv)
+      options[:pattern] = argv.shift unless options[:template]
+      file = argv.shift
+      if file && !File.file?(file)
+        $stderr.puts "No such file -- '#{file}'."
+        exit 1
+      end
+      target = file ? File.new(file) : ARGF
+      extractor = new(target, options)
+      begin
+        puts extraction.to_s(@format)
+      rescue => error
+        if $DEBUG
+          raise error
+        else
+          abort error.to_s
+        end
+      end
+    end
+
   end
 
 end
