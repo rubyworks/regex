@@ -1,3 +1,5 @@
+require 'stringio'
+
 module Regex
 
   #
@@ -22,7 +24,7 @@ module Regex
     attr_accessor :backup
 
     #
-    def initialize(options)
+    def initialize(options={})
       @rules = []
       options.each do |k,v|
         __send__("#{k}=", v)
@@ -37,7 +39,7 @@ module Regex
     #
     def apply(*ios)
       ios.each do |io|
-        original = (IO === io ? io.read : io.to_s)
+        original = (IO === io || StringIO === io ? io.read : io.to_s)
         generate = original
         rules.each do |(pattern, replacement)|
           if pattern.global

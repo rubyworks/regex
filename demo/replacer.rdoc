@@ -6,19 +6,21 @@ strings or IO objects, includeing files.
   require 'regex'
 
 To perform search and replace procedure we create a Regex::Replacer object.
-The constructor method takes an Hash or an Associcative Array of replcement
-_rules_, of matching pattern and replacment pairs.
+The constructor method takes a Hash of options which set universal parameters
+to apply to all search and replace rules. Usually, each individual rule
+will specify it's own options, so for this example we provide none.
 
-  replacer = Regex::Replacer.new('World'=>'Planet Earth')
+  replacer = Regex::Replacer.new
 
-We can always add new rule via the #rule method as well.
+Rules are added via the #rule method.
 
+  replacer.rule('World', 'Planet Earth')
   replacer.rule('!', '!!!')
 
-Rules are applied in the order they were defined --which is why you would
-use an associative array rather than a hash if order is important.
+Rules are applied in the order they were defined. If there rules overlap
+in their effects this can be signifficant.
 
-Now, lets say we have the famous String.
+Now, lets say we have that famous String,
 
   string = "Hello, World!"
 
@@ -32,8 +34,8 @@ has taken place.
 
   string.assert == "Hello, Planet Earth!!!"
 
-As we mentioned at the beginning, substitutions can be apllied to IO objects
-as well.
+As we mentioned at the beginning, substitutions can be applied to IO
+objects in general, so long as they they can be reopended for writing.
 
   require 'stringio'
 
@@ -43,10 +45,13 @@ as well.
 
   io.read.assert == "Hello, Planet Earth!!!"
 
-If io object were a File object, rather than a StringIO, the file would
-be changed on disk. As a precaution a backup file is written to 
-a .backup/ directory in the same directory as the file. If need be the 
-backup option can be turned off.
+If +io+ were a File object, rather than a StringIO, the file would
+be changed on disk. As a precaution a backup file can be written 
+with then name of file plus a '.bak' extension in the same directory as
+the file. To turn on the backup option, either supply it as an option
+to the constructor, or set it via the writer method.
 
-  replacer.backup = false
+  replacer.backup = true
+
+(TODO: Example of a file search and replace.)
 
