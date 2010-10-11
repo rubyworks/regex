@@ -4,7 +4,9 @@ require 'regex/string'
 
 module Regex
 
-  #
+  # TODO: Support multiple files ?
+  # TODO: Output mode that includes file name and line number ?
+
   class Extractor
 
     # When the regular expression return multiple groups,
@@ -34,11 +36,17 @@ module Regex
     # Ignore case.
     attr_accessor :insensitive
 
+    # Escape expression.
+    attr_accessor :escape
+
     # Repeat Match.
     attr_accessor :repeat
 
     # Output format.
     attr_accessor :format
+
+    # Provide detailed output.
+    attr_accessor :detail
 
     # DEPRECATE: Not needed anymore.
     #def self.load(io, options={}, &block)
@@ -82,10 +90,14 @@ module Regex
           when Regexp
             pattern
           when String
-            flags = []
-            flags << Regexp::MULTILINE
-            flags << Regexp::IGNORECASE if insensitive
-            Regexp.new(pattern, *flags)
+            flags = 0
+            flags + Regexp::MULTILINE
+            flags + Regexp::IGNORECASE if insensitive
+            if escape
+              Regexp.new(Regexp.escape(pattern), flags)
+            else
+              Regexp.new(pattern, flags)
+            end
           end
         end
       )
@@ -99,6 +111,48 @@ module Regex
       when :json
         to_s_json
       else
+        to_s_txt
+      end
+    end
+
+    #
+    def to_s_yaml
+      require 'yaml'
+      if detail
+        detailed_structure.to_yaml
+      else
+        structure.to_yaml
+      end
+    end
+
+    #
+    def to_s_json
+      begin
+        require 'json'
+      rescue LoadError
+        require 'json_pure' 
+      end
+      if detail
+        detailed_structure.to_json
+      else
+        structure.to_json
+      end
+    end
+
+    #
+    def to_s_txt
+      if detail
+        out = []
+        detailed_structure.each do |c|
+          c.each do |m, x|
+            out << m
+            x.each do |r|
+              out << "  %s,%s %s" % ["#{r['line']}", "#{r['char']}", "#{r['match']}"]
+            end
+          end
+        end
+        out.join("\n")
+      else
         out = structure
         if repeat
           out = out.map{ |m| m.join(deliminator_group) }
@@ -111,19 +165,21 @@ module Regex
     end
 
     #
-    def to_s_yaml
-      require 'yaml'
-      structure.to_yaml
-    end
-
-    #
-    def to_s_json
-      begin
-        require 'json'
-      rescue LoadError
-        require 'json_pure' 
+    def detailed_structure
+      data = []
+      [extract].flatten.each do |md|
+        c = []
+        m = []
+        md.size.times do |i|
+          m[i] = {}
+          m[i]['match'] = md[i]
+          m[i]['char']  = md.offset(i)[0] #, m[i]['finish'] = *md.offset(i)
+          m[i]['line']  = line_at(m[i]['char'])
+        end
+        data << {md.to_s => m}
       end
-      structure.to_json
+      data
+      #repeat ? data : data.first
     end
 
     # Structure the matchdata according to specified options.
@@ -213,6 +269,10 @@ module Regex
       out
     end
 
+    def line_at(char)
+      text[0..char].count("\n") + 1
+    end
+
     def deliminator_group
       DELIMINATOR_GROUP
     end
@@ -224,10 +284,14 @@ module Regex
     # Commandline Interface to Extractor
     def self.cli(argv=ARGV)
       require 'optparse'
+      format  = nil
       options = {}
       parser = OptionParser.new do |opt|
         opt.on('--template', '-t NAME', "select a built-in regular expression") do |name|
           options[:template] = name
+        end
+        opt.on('--search', '-s PATTERN', "search for regular expression") do |re|
+          options[:pattern] = re
         end
         opt.on('--index', '-n INT', "return a specific match index") do |int|
           options[:index] = int.to_i
@@ -247,6 +311,9 @@ module Regex
         opt.on('--json', '-j', "output in JSON format") do
           format = :json
         end
+        opt.on('--detail', '-d', "provide match details") do
+          options[:detail] = :json
+        end
         opt.on_tail('--debug', 'run in debug mode') do
           $DEBUG = true
         end
@@ -256,22 +323,40 @@ module Regex
         end
       end
       parser.parse!(argv)
-      options[:pattern] = argv.shift unless options[:template]
+
+      unless options[:pattern] or options[:template]
+        re = argv.shift
+        case re
+        when /^\/(.*?)\/(\w*?)$/
+          options[:pattern] = $1
+          $2.split(//).each do |c|
+            case c
+            when 'e' then options[:escape] = true
+            when 'g' then options[:repeat] = true
+            when 'i' then options[:insensitive] = true
+            end
+          end
+        else
+          options[:template] = re
+        end
+      end
+
       file = argv.shift
       if file && !File.file?(file)
         $stderr.puts "No such file -- '#{file}'."
         exit 1
       end
-      target = file ? File.new(file) : ARGF
-      extractor = new(target, options)
+      target  = file ? File.new(file) : ARGF
+
+      extract = new(target, options)
       begin
-        puts extraction.to_s(@format)
-      rescue => error
-        if $DEBUG
-          raise error
-        else
-          abort error.to_s
-        end
+        puts extract.to_s(format)
+      #rescue => error
+      #  if $DEBUG
+      #    raise error
+      #  else
+      #    abort error.to_s
+      #  end
       end
     end
 
