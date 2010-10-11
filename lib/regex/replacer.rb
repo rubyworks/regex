@@ -31,7 +31,7 @@ module Regex
       end
     end
 
-    # 
+    #
     def rule(pattern, replacement)
       @rules << [re(pattern), replacement]
     end
@@ -101,7 +101,7 @@ module Regex
         opt.on('--replace', '-r STRING', 'replacement string of substitution') do |replace|
           replaces << replace
         end
-        opt.on('--escaep', '-e', 'make all patterns exact string matchers') do
+        opt.on('--escape', '-e', 'make all patterns exact string matchers') do
           options[:escape] = true
         end
         opt.on('--insensitive', '-i', 'make all patterns case-insensitive matchers') do
