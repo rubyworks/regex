@@ -1,8 +1,8 @@
 .cache
 log
-doc/qedoc
-doc/rdoc
-doc/ri
+ri
 pkg
-MANIFEST
+tmp
+site/docs
 work/sandbox
+

@@ -19,11 +19,8 @@ gemcutter:
 
 box:
   service: Box
+  types  : [gem]
   active : true
-  types  : [gem, gz]
-  include: [bin, demo, lib, meta, plug, test, "[A-Z]*"]
-  exclude: [Syckfile]
-  master : true
 
 #qed:
 #  service  : lemon
@@ -41,12 +38,14 @@ rdoc:
   exclude  : [ Syckfile ]
   main     : ~
   extra    : ~
+  output   : site/docs/api
   active   : true
 
 ridoc:
   service: RIDoc
   include: ~
   exclude: ~
+  output : ri
   active : true
 
 dnote:

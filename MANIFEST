@@ -1,0 +1,15 @@
+#!mast -x Syckfile bin lib meta qed test [A-Z]*
+bin/regex
+lib/regex/command.rb
+lib/regex/extractor.rb
+lib/regex/replacer.rb
+lib/regex/string.rb
+lib/regex/templates.rb
+lib/regex.rb
+qed/regex.rdoc
+qed/replacer.rdoc
+PROFILE
+PACKAGE
+LICENSE
+README
+HISTORY
