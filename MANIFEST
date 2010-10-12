@@ -2,6 +2,7 @@
 bin/regex
 lib/regex/command.rb
 lib/regex/extractor.rb
+lib/regex/package.yml
 lib/regex/replacer.rb
 lib/regex/string.rb
 lib/regex/templates.rb
