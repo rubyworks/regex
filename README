@@ -2,8 +2,6 @@
 
 ("Like a Knife")
 
-* home: http://proutils.github.com/regex
-* work: http://github.com/proutils/regex
 
 == DESCRIPTION
 
@@ -16,6 +14,13 @@ Now I could have written this in Perl. I'm sure it would just as good, if not
 better since Perl's Regualar Expression engine rocks, or so I hear. But Ruby's is
 pretty damn good too, and getting better (with 1.9+). And since I know Ruby very
 well. Well that's what you get.
+
+
+== RESOURCES
+
+* Home: http://rubyworks.github.com/regex
+* Code: http://github.com/rubyworks/regex
+
 
 == USAGE
 
