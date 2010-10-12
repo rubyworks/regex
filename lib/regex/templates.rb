@@ -2,8 +2,9 @@ module Regex
 
   # = Templates
   #
-  # TODO: What about regular expression with variable content?
-  # Should these be methods rather than constants?
+  # TODO: What about regular expressions with variable content?
+  # Should these be methods rather than constants? But then how
+  # would we handle named substituions?
   module Templates
 
     # Empty line.
@@ -50,16 +51,31 @@ module Regex
     # HTTP URL Address
     HTTP = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$/
 
-    # Ruby command block.
-    RUBYBLOCK = /^=begin\s+(.*?)\n(.*?)\n=end/mi
+    # Ruby comment block.
+    RUBYBLOCK = /^=begin\s*(.*?)\n(.*?)\n=end/m
 
     # Ruby method definition.
-    RUBYMETHOD = /\A\s*(\#.*?)^\s*def\s+(.*?)$/mi
+    # TODO: Not quite right.
+    RUBYMETHOD_WITH_COMMENT = /(^\ *\#.*?)^\s*def\s*(.*?)$/m
+
+    #
+    RUBYMETHOD = /^\ *def\s*(.*?)$/
 
     # By the legendary abigail. Fails to match if and only if it is matched against
     # a prime number of 1's. That is, '11' fails, but '1111' does not.
     # I once heard him talk why this works, but I forgot most of it.
     PRIMEONES = /^1?$|^(11+?)\1+$/
+
+    # Name of all constants.
+    def self.list
+      constants.map{ |c| c.downcase }
+    end
+
+    # Lookup a template by name.
+    def self.[](name)
+      Templates.const_get(name.upcase)
+    end
+
   end
 
   # Add templates to Regex module.

@@ -54,7 +54,7 @@ module Regex
       end
     end
 
-    ;;;; private ;;;;
+    private
 
     # Parse pattern matcher.
     def re(pattern)
@@ -219,4 +219,3 @@ module Regex
   end
 
 end
-

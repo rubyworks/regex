@@ -4,9 +4,7 @@ require 'regex/string'
 
 module Regex
 
-  # TODO: Support multiple files ?
-  # TODO: Output mode that includes file name and line number ?
-
+  # Supports [:name:] notation for subsitution of built-in templates.
   class Extractor
 
     # When the regular expression return multiple groups,
@@ -19,9 +17,22 @@ module Regex
     DELIMINATOR_RECORD = 30.chr + "\n"
 
     #
-    #attr_accessor :text
+    def self.input_cache(input)
+      @input_cache ||= {}
+      @input_cache[input] ||= (
+        case input
+        when String
+          input
+        else
+          input.read
+        end
+      )
+    end
 
-    # Remove XML tags from search.
+    # List of IO objects or Strings to search.
+    attr_accessor :io
+
+    # Remove XML tags from search. (NOT CURRENTLY SUPPORTED)
     attr_accessor :unxml
 
     # Regular expression.
@@ -32,6 +43,9 @@ module Regex
 
     # Index of expression return.
     attr_accessor :index
+
+    # Multiline match.
+    attr_accessor :multiline
 
     # Ignore case.
     attr_accessor :insensitive
@@ -48,37 +62,41 @@ module Regex
     # Provide detailed output.
     attr_accessor :detail
 
-    # DEPRECATE: Not needed anymore.
-    #def self.load(io, options={}, &block)
-    #  new(io, options, &block)
-    #end
+    # Use ANSI codes in output?
+    attr_accessor :ansi
+
+    # Use ANSI codes in output?
+    def ansi? ; @ansi ; end
 
     # New extractor.
-    def initialize(io, options={})
-      @raw = (String === io ? io : io.read)
+    def initialize(*io)
+      options = Hash === io.last ? io.pop : {}
+
+      @io   = io
+      @ansi = true
+
       options.each do |k,v|
         __send__("#{k}=", v)
       end
-      yield(self) if block_given?
     end
 
-    # Read file.
-    #def raw
-    #  @raw ||= open(@file) # File.read(@file)
-    #end
+    #
+    def inspect
+      "#{self.class.name}"
+    end
 
     #--
     # TODO: unxml is too primative, use real xml parser like nokogiri
     #++
-    def text
-      @text ||= (
-        if unxml
-          raw.gsub!(/\<(.*?)\>/, '')
-        else
-          @raw
-        end
-      )
-    end
+    #def text
+    #  @text ||= (
+    #    if unxml
+    #      raw.gsub!(/\<(.*?)\>/, '')
+    #    else
+    #      @raw
+    #    end
+    #  )
+    #end
 
     #
     def regex
@@ -91,16 +109,28 @@ module Regex
             pattern
           when String
             flags = 0
-            flags + Regexp::MULTILINE
+            flags + Regexp::MULTILINE  if multiline
             flags + Regexp::IGNORECASE if insensitive
             if escape
               Regexp.new(Regexp.escape(pattern), flags)
             else
-              Regexp.new(pattern, flags)
+              pat = substitute_templates(pattern)
+              Regexp.new(pat, flags)
             end
           end
         end
       )
+    end
+
+    #
+    def substitute_templates(pattern)
+      pat = pattern
+      Templates.list.each do |name|
+        if pat.include?("[:#{name}:]")
+          pat = pat.gsub(/(?!:\\)\[\:#{name}\:\]/, Templates[name].to_s)
+        end
+      end
+      pat
     end
 
     #
@@ -111,7 +141,11 @@ module Regex
       when :json
         to_s_json
       else
-        to_s_txt
+        if detail
+          output_detailed_text
+        else
+          output_text
+        end
       end
     end
 
@@ -119,7 +153,7 @@ module Regex
     def to_s_yaml
       require 'yaml'
       if detail
-        detailed_structure.to_yaml
+        matches_by_path.to_yaml
       else
         structure.to_yaml
       end
@@ -133,53 +167,93 @@ module Regex
         require 'json_pure' 
       end
       if detail
-        detailed_structure.to_json
+        matches_by_path.to_json
       else
         structure.to_json
       end
     end
 
     #
-    def to_s_txt
-      if detail
-        out = []
-        detailed_structure.each do |c|
-          c.each do |m, x|
-            out << m
-            x.each do |r|
-              out << "  %s,%s %s" % ["#{r['line']}", "#{r['char']}", "#{r['match']}"]
-            end
+    def output_text
+      out = structure
+      if repeat
+        out = out.map{ |m| m.join(deliminator_group) }
+        out = out.join(deliminator_record) #.chomp("\n") + "\n"
+      else
+        out = out.join(deliminator_group) #.chomp("\n") + "\n"
+      end
+      out
+    end
+
+    # Detailed text output.
+    def output_detailed_text
+      if repeat
+        count  = 0
+        string = []
+        mapping.each do |input, matches|
+          path = (File === input ? input.path : "(io #{input.object_id})")
+          string << ""
+          string << bold(path)
+          matches.each do |match|
+            string << formatted_match(input, match)
+            count += 1
           end
         end
-        out.join("\n")
+        string.join("\n") + "\n"
+        string << "\n(#{count} matches)"
       else
-        out = structure
-        if repeat
-          out = out.map{ |m| m.join(deliminator_group) }
-          out = out.join(deliminator_record) #.chomp("\n") + "\n"
-        else
-          out = out.join(deliminator_group) #.chomp("\n") + "\n"
-        end
-        out
+        string = []
+        match  = scan.first
+        input  = match.input
+        path   = (File === input ? input.path : "(io #{input.object_id})")
+        string << ""
+        string << bold(path)
+        string << formatted_match(input, match)
+        string.join("\n")
+        string << "" #"\n1 match"
       end
     end
 
     #
-    def detailed_structure
-      data = []
-      [extract].flatten.each do |md|
-        c = []
-        m = []
-        md.size.times do |i|
-          m[i] = {}
-          m[i]['match'] = md[i]
-          m[i]['char']  = md.offset(i)[0] #, m[i]['finish'] = *md.offset(i)
-          m[i]['line']  = line_at(m[i]['char'])
+    def formatted_match(input, match)
+      string = []
+      path = (File === input ? input.path : "(io #{input.object_id})")
+      part, char, line = match.info(0)
+      if index
+        part, char, line = match.info(index)
+        string << "%s %s %s" % [line, char, part.inspect]
+      else
+        string << bold("%s %s %s" % [line, char, part.inspect])
+        if match.size > 0
+          (1...match.size).each do |i|
+            part, char, line = match.info(i)
+            string << "#{i}. %s %s %s" % [line, char, part.inspect]
+          end
         end
-        data << {md.to_s => m}
       end
-      data
-      #repeat ? data : data.first
+      string.join("\n")
+    end
+
+    #
+    def matches_by_path
+      r = Hash.new{ |h,k| h[k] = [] }
+      h = Hash.new{ |h,k| h[k] = [] }
+      scan.each do |match|
+        h[match.input] << match
+      end
+      h.each do |input, matches|
+        path = (File === input ? input.path : "(io #{input.object_id})")
+        if index
+          matches.each do |match|
+            r[path] << match.breakdown[index]
+          end
+        else
+          matches.each do |match|
+            r[path] << match.breakdown
+          end
+        end
+      end
+      r
     end
 
     # Structure the matchdata according to specified options.
@@ -189,88 +263,54 @@ module Regex
 
     # Structure the matchdata for single match.
     def structure_single
-      md = extract
-      if index
-        [md[index]]
-      elsif md.size > 1
-        md[1..-1]
-      else
-        [md[0]]
-      end
+      structure_repeat.first
     end
 
     # Structure the matchdata for repeat matches.
     def structure_repeat
-      out = extract
       if index
-        out.map{ |md| [md[index]] }
+        scan.map{ |match| [match[index]] } 
       else
-        out.map{ |md| md.size > 1 ? md[1..-1] : [md[0]] }
+        scan.map{ |match| match.size > 1 ? match[1..-1] : [match[0]] }
       end
     end
 
-    # Extract match from source text.
-    def extract
-      if repeat
-        extract_repeat
-      else
-        extract_single
+    # Scan inputs for matches.
+    #
+    # Return an associative Array of [input, matchdata].
+    def scan
+      list = []
+      io.each do |input|
+        text = read(input)
+        text.scan(regex) do
+          list << Match.new(input, $~)
+        end
       end
+      list
     end
 
     #
-    #def extract_single
-    #  out = []
-    #  if md = matchdata
-    #    if index
-    #      out << md[index]
-    #    elsif md.size > 1
-    #      out = md[1..-1] #.join(deliminator_group)
-    #    else
-    #      out = md
-    #    end
-    #  end
-    #  return out
-    #end
-
-    # Extract single match from source text.
-    def extract_single
-      md = regex.match(text)
-      md ? md : []
-    end
-
-    #
-    #def matchdata
-    #  regex.match(text)
-    #end
-
-    #
-    #def extract_repeat
-    #  out = []
-    #  text.scan(regex) do
-    #    md = $~
-    #    if index
-    #      out << [md[index]]
-    #    elsif md.size > 1
-    #      out << md[1..-1] #.join(deliminator_group)
-    #    else
-    #      out << md
-    #    end      
-    #  end
-    #  out #.join(deliminator_record)
-    #end
-
-    # Extract repeat matches from source text.
-    def extract_repeat
-      out = []
-      text.scan(regex) do
-        out << $~
+    def mapping
+      hash = Hash.new{ |h,k| h[k]=[] }
+      scan.each do |match|
+        hash[match.input] << match
       end
-      out
+      hash
     end
 
-    def line_at(char)
-      text[0..char].count("\n") + 1
+    # TODO: unxml won't give corrent char counts.
+    def read(input)
+      Extractor.input_cache(input)
+      #  if unxml
+      #    txt.gsub(/\<(.*?)\>/, '')
+      #  else
+      #    txt
+      #  end
+    end
+
+    # Return the line number of the +char+ position within +text+.
+    def line_at(io, char)
+      read(io)[0..char].count("\n") + 1
     end
 
     def deliminator_group
@@ -281,7 +321,7 @@ module Regex
       DELIMINATOR_RECORD
     end
 
-    # Commandline Interface to Extractor
+    # Commandline Interface to Extractor.
     def self.cli(argv=ARGV)
       require 'optparse'
       format  = nil
@@ -299,9 +339,12 @@ module Regex
         opt.on('--insensitive', '-i', "case insensitive matching") do
           options[:insensitive] = true
         end
-        opt.on('--unxml', '-x', "ignore XML/HTML tags") do
-          options[:unxml] = true
+        opt.on('--multiline', '-m', "multiline matching") do
+          options[:multiline] = true
         end
+        #opt.on('--unxml', '-x', "ignore XML/HTML tags") do
+        #  options[:unxml] = true
+        #end
         opt.on('--global', '-g', "find all matching occurances") do
           options[:repeat] = true
         end
@@ -313,6 +356,9 @@ module Regex
         end
         opt.on('--detail', '-d', "provide match details") do
           options[:detail] = :json
+        end
+        opt.on('--[no-]ansi', "toggle ansi color") do |val|
+          options[:ansi] = val
         end
         opt.on_tail('--debug', 'run in debug mode') do
           $DEBUG = true
@@ -341,24 +387,94 @@ module Regex
         end
       end
 
-      file = argv.shift
-      if file && !File.file?(file)
-        $stderr.puts "No such file -- '#{file}'."
-        exit 1
-      end
-      target  = file ? File.new(file) : ARGF
+      files = argv
 
-      extract = new(target, options)
-      begin
-        puts extract.to_s(format)
-      #rescue => error
-      #  if $DEBUG
-      #    raise error
-      #  else
-      #    abort error.to_s
-      #  end
+      files.each do |file|
+        if !File.file?(file)
+          $stderr.puts "No such file -- '#{file}'."
+          exit 1
+        end
+      end
+
+      if files.empty?
+        args = [ARGF]
+      else
+        args = files.map{ |f| open(f) } #File.new(f) }
+      end
+
+      args << options
+
+      extract = new(*args)
+
+      puts extract.to_s(format)
+    end
+
+    #
+    def bold(str)
+      if ansi?
+        "\e[1m" + str + "\e[0m"
+      else
+        string
       end
     end
+
+
+    #
+    class Match
+      attr :input
+      attr :match
+
+      # match - Instance of MatchData
+      #
+      def initialize(input, match)
+        @input = input
+        @match = match
+      end
+
+      #
+      def [](i)
+        @match[i]
+      end
+
+      #
+      def size
+        @match.size
+      end
+
+      #
+      def breakdown
+        m = []
+        range = (0...match.size)
+        range.each do |i|
+          char = match.offset(i)[0]
+          line = line_at(char)
+          part = match[i]
+          m << {'index'=>i, 'line'=>line, 'char'=>char, 'text'=>part}
+        end
+        m
+      end
+
+      #
+      def info(index)
+        text = match[index]
+        char = match.offset(index)[0]
+        line = line_at(char)
+        return text, char, line
+      end
+
+      # Return the line number of the +char+ position within +text+.
+      def line_at(char)
+        return nil unless char
+        text[0..char].count("\n") + 1
+      end
+
+      #
+      def text
+        Extractor.input_cache(input)
+      end
+
+    end
+
 
   end
 

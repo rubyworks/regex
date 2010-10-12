@@ -1,9 +1,22 @@
 module Regex
-  VERSION = "1.2.0"
+  DIRECTORY = File.dirname(__FILE__)
+
+  # Access to PACAKGE metadata.
+  def self.package
+    @package ||= (
+      require 'yaml'
+      YAML.load(File.new(DIRECTORY + '/regex/package.yml'))
+    )
+  end
+
+  # Need VRESION? You got it.
+  def self.const_missing(name)
+    package[name.to_s.downcase] || super(name)
+  end
 
   # Shortcut to create a new Regex::Extractor instance.
-  def self.new(io, options={})
-    Extractor.new(io, options)
+  def self.new(*io)
+    Extractor.new(*io)
   end
 end
 

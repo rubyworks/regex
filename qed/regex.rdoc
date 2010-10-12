@@ -19,26 +19,26 @@ We will also suppoly a matching pattern, as none of
 the matching functions will work without providing
 a pattern or the name of built-in pattern template.
 
-  regex = Regex.new(text, :pattern=>'\w+')
+  rx = Regex.new(text, :pattern=>'\w+')
 
 We can see that the Regex object has converted the pattern
 into the expected regular expression via the #regex method.
 
-  regex.regex.assert == /\w+/m
+  rx.regex.assert == /\w+/
 
 Under the hood, Regex has split the process of matching,
 organizing and formating the results into separate methods.
 We can use the #structure method to see thematch results
 organized into uniform arrays.
 
-  regex.structure.assert == %w{We}
+  rx.structure.assert == %w{We}
 
 Whereas the last use only returns a single metch, if we turn
 on repeat mode we can see every word.
 
-  regex.repeat = true
+  rx.repeat = true
 
-  regex.structure.assert == %w{We will match against this string}.map{ |e| [e] }
+  rx.structure.assert == %w{We will match against this string}.map{ |e| [e] }
 
 Notice that repeat mode creates an array in an array.
 
