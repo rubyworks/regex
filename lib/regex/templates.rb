@@ -3,8 +3,9 @@ module Regex
   # = Templates
   #
   # TODO: What about regular expressions with variable content?
-  # Should these be methods rather than constants? But then how
-  # would we handle named substituions?
+  # But then how would we handle named substituions?
+  #
+  # TODO: Should these be methods rather than constants?
   module Templates
 
     # Empty line.
@@ -13,6 +14,7 @@ module Regex
     # Blank line.
     BLANK = /^\s*$/
 
+    #
     NUMBER = /[-+]?[0-9]*\.?[0-9]+/
 
     # Markup language tag, e.g \<a>stuff</a>.
@@ -21,8 +23,8 @@ module Regex
     # IPv4 Address
     IPV4 = /\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/
 
-    # Username
-    USERNAME = /^[a-zA-Z0-9_]{3,16}$/
+    # Dni (spanish ID card)
+    DNI = /^\d{8}[A-Za-z]{1}$/
 
     # Email Address
     EMAIL = /([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/i
@@ -51,6 +53,34 @@ module Regex
     # HTTP URL Address
     HTTP = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$/
 
+    # Validates Credit Card numbers, contains 16 numbers in groups of 4 separated
+    # by `-`, space or nothing.
+    CREDITCARD = /^(\d{4}-){3}\d{4}$|^(\d{4}\s){3}\d{4}$|^\d{16}$/
+
+    # MasterCard credit card
+    MASTERCARD = /^5[1-5]\d{14}$/
+
+    # Visa credit card.
+    VISA = /^4\d{15}$/
+
+    # TODO: Better name?
+    UNIXWORD = /^[a-zA-Z0-9_]*$/
+
+    # Username, at lest 3 characters and no more than 16.
+    USERNAME = /^[a-zA-Z0-9_]{3,16}$/
+
+    # Twitter username
+    TWITTER_USERNMAE = /^([a-z0-9\_])+$/ix
+
+    # Github username
+    GITHUB_USERNAME = /^([a-z0-9\_\-])+$/ix
+
+    # Slideshare username
+    SLIDESHARE_USERNAME = /^([a-z0-9])+$/ix
+
+    # Del.icio.us username
+    DELICIOUS_USERNMAME = /^([a-z0-9\_\-])+$/ix
+
     # Ruby comment block.
     RUBYBLOCK = /^=begin\s*(.*?)\n(.*?)\n=end/m
 
@@ -58,7 +88,7 @@ module Regex
     # TODO: Not quite right.
     RUBYMETHOD_WITH_COMMENT = /(^\ *\#.*?)^\s*def\s*(.*?)$/m
 
-    #
+    # Ruby method definition.
     RUBYMETHOD = /^\ *def\s*(.*?)$/
 
     # By the legendary abigail. Fails to match if and only if it is matched against
