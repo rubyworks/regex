@@ -1,0 +1,10 @@
+Tue, 12 Oct 2010 07:13:09 -0400
+lib/regex.rb	Tue, 12 Oct 2010 06:57:44 -0400
+lib/regex/replacer.rb	Tue, 12 Oct 2010 05:46:41 -0400
+lib/regex/command.rb	Tue, 12 Oct 2010 06:11:46 -0400
+lib/regex/package.yml	Mon, 11 Oct 2010 09:10:42 -0400
+lib/regex/templates.rb	Tue, 12 Oct 2010 06:43:41 -0400
+lib/regex/extractor.rb	Tue, 12 Oct 2010 06:51:09 -0400
+lib/regex/string.rb	Thu, 29 Jul 2010 13:36:06 -0400
+README	Thu, 29 Jul 2010 13:42:43 -0400
+LICENSE	Thu, 29 Jul 2010 13:43:27 -0400

@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Module: Regex::Templates</title>
+
+  
+    <link rel="SHORTCUT ICON" href="../assets/icon/module.png">
+  
+
+  <link type="text/css" rel="stylesheet" href="../assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="../assets/highlight/styles/github.css" title="GitHub" />
+
+  <script type="text/javascript" charset="utf-8" src="../assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      hookHighlightSyntax();
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind("click", highlightClickTarget);
+    });
+  </script>
+</head>
+<body class="module">
+<div id="main">
+
+  <div class="head">
+    <h1>
+      
+        <img src="../assets/icon/module.png" align="absmiddle">&nbsp;
+      
+      <a href="../index.html">Regex</a>&nbsp;
+      <a href="/">Regex::Templates</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li class="file"><a href="../lib/regex/templates_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/regex/templates.rb">lib/regex/templates.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      <!-- What about Git info, or Hg info? This seems almost silly, albeit kind of cool. -->
+      <!-- TODO: generalize this for all SCMs -->
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+            
+            <li class="singleton">
+              <a href="#method-c-%5B%5D">::[]</a>
+            </li>
+          
+            
+            <li class="singleton">
+              <a href="#method-c-list">::list</a>
+            </li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Information</h3>
+        <ul>
+        
+          <li class="file"><a href="../README.html">README</a></li>
+        
+          <li class="file"><a href="../LICENSE.html">LICENSE</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="../assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <!-- classpage.html : classes -->
+        <ul class="link-list">
+        
+          <li class="module"><a href="../Regex.html">Regex</a></li>
+        
+          <li class="class"><a href="../Regex/Extractor.html">Regex::Extractor</a></li>
+        
+          <li class="class"><a href="../Regex/Extractor/Match.html">Regex::Extractor::Match</a></li>
+        
+          <li class="class"><a href="../Regex/Replacer.html">Regex::Replacer</a></li>
+        
+          <li class="class"><a href="../Regex/Replacer/Matcher.html">Regex::Replacer::Matcher</a></li>
+        
+          <li class="module"><a href="../Regex/String.html">Regex::String</a></li>
+        
+          <li class="module"><a href="../Regex/Templates.html">Regex::Templates</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+    </div>
+
+    <div id="validator-badges">
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://rubyworks.github.com/rdazzle">RDazzle Redfish</a> 1.4.0
+      <br/><br/>
+    </div>
+  </div>
+
+  <div id="documentation">
+
+    <div id="description">
+      
+
+      <h1><a href="Templates.html">Templates</a></h1>
+<p>
+TODO: What about regular expressions with variable content? Should these be
+methods rather than constants? But then how would we handle named
+substituions?
+</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+    <div id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt><a name="EMPTY">EMPTY</a></dt>
+        
+        <dd class="description"><p>
+Empty line.
+</p></dd>
+        
+      
+        <dt><a name="BLANK">BLANK</a></dt>
+        
+        <dd class="description"><p>
+Blank line.
+</p></dd>
+        
+      
+        <dt><a name="NUMBER">NUMBER</a></dt>
+        
+        <dd class="description"></dd>
+        
+      
+        <dt><a name="MLTAG">MLTAG</a></dt>
+        
+        <dd class="description"><p>
+Markup language tag, e.g <a>stuff</a>.
+</p></dd>
+        
+      
+        <dt><a name="IPV4">IPV4</a></dt>
+        
+        <dd class="description"><p>
+IPv4 Address
+</p></dd>
+        
+      
+        <dt><a name="USERNAME">USERNAME</a></dt>
+        
+        <dd class="description"><p>
+Username
+</p></dd>
+        
+      
+        <dt><a name="EMAIL">EMAIL</a></dt>
+        
+        <dd class="description"><p>
+Email Address
+</p></dd>
+        
+      
+        <dt><a name="USPHONE">USPHONE</a></dt>
+        
+        <dd class="description"><p>
+United States phone number.
+</p></dd>
+        
+      
+        <dt><a name="USZIP">USZIP</a></dt>
+        
+        <dd class="description"><p>
+United States zip code.
+</p></dd>
+        
+      
+        <dt><a name="SSN">SSN</a></dt>
+        
+        <dd class="description"><p>
+United States social secuirty number.
+</p></dd>
+        
+      
+        <dt><a name="DOLLARS">DOLLARS</a></dt>
+        
+        <dd class="description"><p>
+United States dollar amount.
+</p></dd>
+        
+      
+        <dt><a name="BIC">BIC</a></dt>
+        
+        <dd class="description"><p>
+Bank Ientification Code
+</p></dd>
+        
+      
+        <dt><a name="IBAN">IBAN</a></dt>
+        
+        <dd class="description"></dd>
+        
+      
+        <dt><a name="HEX">HEX</a></dt>
+        
+        <dd class="description"><p>
+Hexidecimal value.
+</p></dd>
+        
+      
+        <dt><a name="HTTP">HTTP</a></dt>
+        
+        <dd class="description"><p>
+<a href="Templates.html#HTTP">HTTP</a> URL Address
+</p></dd>
+        
+      
+        <dt><a name="RUBYBLOCK">RUBYBLOCK</a></dt>
+        
+        <dd class="description"><p>
+Ruby comment block.
+</p></dd>
+        
+      
+        <dt><a name="RUBYMETHOD_WITH_COMMENT">RUBYMETHOD_WITH_COMMENT</a></dt>
+        
+        <dd class="description"><p>
+Ruby method definition. TODO: Not quite right.
+</p></dd>
+        
+      
+        <dt><a name="RUBYMETHOD">RUBYMETHOD</a></dt>
+        
+        <dd class="description"></dd>
+        
+      
+        <dt><a name="PRIMEONES">PRIMEONES</a></dt>
+        
+        <dd class="description"><p>
+By the legendary abigail. Fails to match if and only if it is matched
+against a prime number of 1&#8217;s. That is, &#8216;11&#8217; fails, but
+&#8216;1111&#8217; does not. I once heard him talk why this works, but I
+forgot most of it.
+</p></dd>
+        
+      
+      </dl>
+    </div>
+    
+
+    <!-- Attributes -->
+    
+
+    <!-- Methods -->
+    
+    <div id="public-class-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="--method" class="method-detail ">
+        <a name="method-c-%5B%5D"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">[]</span><span
+            class="method-args">(name)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Lookup a template by name.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="--source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/regex/templates.rb, line 75</span>
+75:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-operator">[]</span>(<span class="ruby-identifier">name</span>)
+76:       <span class="ruby-constant">Templates</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">upcase</span>)
+77:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="list-method" class="method-detail ">
+        <a name="method-c-list"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">list</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Name of all constants.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="list-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/regex/templates.rb, line 70</span>
+70:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">list</span>
+71:       <span class="ruby-identifier">constants</span>.<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">downcase</span> }
+72:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+
+  <div id="rdoc-debugging-section-dump" class="debugging-section">
+  
+    <p>Disabled; run with --debug to generate this.</p>
+  
+  </div>
+
+</main>
+</body>
+</html>
+
