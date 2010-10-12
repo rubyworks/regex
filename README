@@ -19,30 +19,62 @@ well. Well that's what you get.
 
 == USAGE
 
-Okay, check it out. It's real simple. Supply a regular expression and a file to
-be searched to the +regex+ command.
+For detailed explication and examples of usage refer to the
+(User Docs){http://wiki.github.com/rubyworks/regex}, the
+(QED Docs){http://github.com/rubyworks/regex/docs/qed} and the
+(API Docs){http://github.com/rubyworks/regex/docs/api}.
 
-  $ regex '=begin.*?\n(.*)\n=end' sample.rb
+In brief, usage simply entails supplying a regular expression and a list of files
+to be searched to the +regex+ command.
 
-It does exactly what you would expect --returns the content between the first
-<tt>=begin ... =end</tt> clause it comes across. To see all such comments, you can
-use the <tt>--repeat</tt> option.
+  $ regex '/=begin.*?\n(.*)\n=end/' sample.rb
 
-  $ regex --repeat '=begin.*?\n(.*)\n=end' sample.rb
+This example does exactly what you would expect --returns the content between
+the first <code>=begin ... =end</code> clause it comes across. To see all such
+block comments, as you would expect, you can use add <code>g</code> regular
+expression mode flag.
+
+  $ regex '/=begin.*?\n(.*)\n=end/g' sample.rb
+
+Alternatively you can use the <code>--repeat/--global/-g</code> option.
+
+  $ regex -g '/=begin.*?\n(.*)\n=end/' sample.rb
+
+Notice that in all these examples we have used single quotes to wrap the
+regular expression. This is to prevent the shell from expanding <code>*</code>
+and <code>?<code> marks.
 
 By default +regex+ produces string output. Regular expression groups are delimited
 by ASCII 29 (035 1D) END OF GROUP, and repeat matches are delimited by
 ASCII character 30 (036 1E) END OF RECORD.
 
-Instead of string output, +regex+ also supports YAML and JSON formats. E.g.
+Instead of string output, +regex+ also supports YAML and JSON formats using the
+<code>--yaml/-y</code> and <code>--json/-j</code> options.
 
-  $ regex --yaml --repeat '=begin.*?\n(.*)\n=end' sample.rb
+  $ regex -y -g '/=begin.*?\n(.*)\n=end/' sample.rb
 
 In this case the returned matches are delimited using as an array of arrays.
 
-Check out the <tt>--help</tt> and I am sure the rest will be smooth sailing.
+To get more information that just the match results use the <code>--detail/-d</code>
+option.
+
+Also, we can do without the the <code>/ /<code> deliminators on the regular
+expression if we use the <code>--search/-s</code> option instead. Going back to
+our first example:
+
+  $ regex -s '=begin.*?\n(.*)\n=end' sample.rb
+
+To replace text, use the <code>--replace/--r</code> option.
+
+  $ regex --yaml --repeat -s 'Tom' -r 'Bob' sample.rb
+
+This will replace every occurance of "Tom" with "Bob" in the <code>sample.rb</code>
+file. By default <code>regex</code> will backup any file it changes by adding a
+<code>.bak</code> extension to the original copy.
+
+Check out the <code>--help</code> and I am sure the rest will be smooth sailing.
 But it you want more information, then do us the good favor of jumping over
-to the wiki[http://wiki.github.com/proutils/regex].
+to the wiki[http://wiki.github.com/rubyworks/regex].
 
 == STATUS
 
@@ -51,7 +83,7 @@ or that every detail is going to work peachy. But hey, if something needs fixing
 or a feature needs adding, well then get in there and send me a patch. Open
 source software is built on *TEAM WORK*, baby.
 
-And expect a potenial for rapid change here at the beginning.
+Expect a potenial for rapid change here at the beginning.
 
 == COPYRIGHT
 

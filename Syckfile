@@ -17,6 +17,9 @@ gemcutter:
   service: GemCutter
   active: true
 
+grancher:
+  active: true
+
 box:
   service: Box
   types  : [gem]

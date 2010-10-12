@@ -7,9 +7,7 @@
   <LINK rel="shortcut icon" href="assets/images/ruby.png"/>
 
   <LINK type="text/css" rel="stylesheet" href="assets/styles/reset.css" />
-  <LINK type="text/css" rel="stylesheet" href="assets/styles/tag.css" />
   <LINK type="text/css" rel="stylesheet" href="assets/styles/id.css" />
-  <LINK type="text/css" rel="stylesheet" href="assets/styles/class.css" />
 
   <SCRIPT language="javascript" type="text/javascript" src="assets/scripts/jquery.js"></SCRIPT>
   <SCRIPT language="javascript" type="text/javascript" src="assets/scripts/highlight.js"></SCRIPT>
@@ -42,18 +40,20 @@
   <tr><td style="width: 50%;">
     <div id="description">
       Regex is a simple commmandline Regular Expression tool that
-      makes it all too easy to search text documents for content.
+      makes it all too easy to search text documents for content
+      and replace text across mutiple files.
       <br/><br/>
       <a href="#" onclick="$('#readme').toggle();">[Toggle README]</div>
     </div>
   </td><td>
     <div id="nav">
       <ul>
-        <li><a href="http://wiki.github.com/proutils/regex/">Documentation</a></li>
-        <li><a href="http://proutils.github.com/regex/rdoc/">API Reference</a></li>
-        <li><a href="http://groups.google.com/group/proutils/topics?hl=en">Mailing List</a></li>
-        <li><a href="http://gemcutter.org/gems/regex/">Download</a></li>
-        <li><a href="http://github.com/proutils/regex/">Development</a></li>
+        <li><a href="http://wiki.github.com/rubyworks/regex">Documentation</a></li>
+        <li><a href="docs/qed">QED Reference</a></li>
+        <li><a href="docs/api">API Reference</a></li>
+        <li><a href="http://groups.google.com/group/rubyworks-mailinglist">Mailing List</a></li>
+        <li><a href="http://rubygems.org/gems/regex/">RubyGem</a></li>
+        <li><a href="http://github.com/rubyworks/regex/">Development</a></li>
       </ul>
     </div>
   </td></tr>
@@ -63,8 +63,8 @@
     <div class="section" id="section_description"><h2>DESCRIPTION</h2>
 <p>
 Yea, I know what you are going to say. &#8220;I can do that with
-____&#8220; Fill in the blank with <tt>grep</tt>, <tt>awk</tt>,
-<tt>sed</tt>, <tt>perl</tt>, etc. But honestly, none of these tools are
+____&#8220; Fill in the blank with <code>grep</code>, <code>awk</code>,
+<code>sed</code>, <code>perl</code>, etc. But honestly, none of these tools are
 "Langauge 2.0" (read &#8220;post-Ruby&#8221;). What I want is a simple
 commandline tool that given me quick access to a Regular Expression engine.
 No more, no less.
@@ -77,39 +77,69 @@ so I hear. But Ruby&#8217;s is pretty damn good too, and getting better (with
 </p>
 </div><div class="section" id="section_usage"><h2>USAGE</h2>
 <p>
+For detailed explication and examples of usage refer to the
+<a href="http://wiki.github.com/rubyworks/regex">User Docs</a>, the
+<a href="http://github.com/rubyworks/regex/docs/qed">QED Docs</a> and
+the <a href="http://github.com/rubyworks/regex/docs/api">API Docs</a>.
+</p>
+<p>
 Okay, check it out. It&#8217;s real simple. Supply a regular expression and
-a file to search to the <tt>regex</tt> command.
+a file to search to the <code>regex</code> command.
 </p>
 <pre>
-  $ regex '=begin.*?\n(.*)\n=end' sample.rb
+  $ regex '/=begin.*?\n(.*)\n=end/' sample.rb
 </pre>
 <p>
 It does exactly what you would expect &#8212;returns the content between
-the first <tt>=begin...=end</tt> clause it comes across. To see all such
-comments, you can use the <tt>--repeat</tt> options.
+the first <code>=begin<code> ... <code>=end</code> clause it comes across.
+To see all such comments, as you would expect, you can use add <code>g</code>
+regular expression mode flag.
 </p>
 <pre>
-  $ regex --repeat '=begin.*?\n(.*)\n=end' sample.rb
+  $ regex '/=begin.*?\n(.*)\n=end/g' sample.rb
 </pre>
 <p>
-By default <tt>regex</tt> produces string output. Regular expression groups
+Alternatively you can use the <code>--repeat/--global/-g</code> option.
+<pre>
+  $ regex -g '/=begin.*?\n(.*)\n=end/' sample.rb
+</pre>
+<p>
+Notice that in all these examples we have used single quotes to wrap the
+regular expression.
+</p>
+<p>
+By default <code>regex</code> produces string output. Regular expression groups
 are delimited by ASCII 29 (035 1D) END OF GROUP, and repeat matches are
 delimited by ASCII character 30 (036 1E) END OF RECORD.
 </p>
 <p>
-Instead of string output, <tt>regex</tt> also support YAML and JSON output.
+Instead of string output, <code>regex</code> also support YAML and JSON output
+via the <code>--yaml/-y</code> and <code>--json/-j</code> options.
 </p>
 <pre>
-  $ regex --yaml --repeat '=begin.*?\n(.*)\n=end' sample.rb
+  $ regex -y -g '/=begin.*?\n(.*)\n=end/' sample.rb
 </pre>
 <p>
 In this case the returned matches are delimited using an array of arrays.
 </p>
 <p>
-Check out the <tt>--help</tt> and I am sure the rest will come to you real
+To search and replace text, use the <code>--replace/-r</code> option.
+</p>
+<pre>
+  $ regex -g -s 'Tom' -r 'Bob' sample.rb
+</pre>
+<p>
+This will replace every occurance of "Tom" with "Bob" in the sameple.rb file.
+By default <code>regex</code> will backup any file it changes by adding a
+<code>.bak</code> extension to the original copy. You can deactivate this
+precaution with <code>--no-backup</code>.
+</p>
+<p>
+Check out the <code>--help</code> and I am sure the rest will come to you real
 quick. But it you want more information, then do us the good favor of
 jumping over to the <a href="http://wiki.github.com/proutils/regex">wiki</a>.
 </p>
+
 </div><div class="section" id="section_status"><h2>STATUS</h2>
 <p>
 This is a very early release. So don&#8217;t expect every feature under the
