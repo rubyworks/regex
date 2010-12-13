@@ -1,18 +1,19 @@
 module Regex
-  DIRECTORY = File.dirname(__FILE__)
-
   # Access to PACAKGE metadata.
-  def self.package
-    @package ||= (
+  def self.metadata
+    @metadata ||= (
       require 'yaml'
-      YAML.load(File.new(DIRECTORY + '/regex/package.yml'))
+      YAML.load(File.new(File.dirname(__FILE__) + '/regex.yml'))
     )
   end
 
   # Need VRESION? You got it.
   def self.const_missing(name)
-    package[name.to_s.downcase] || super(name)
+    metadata[name.to_s.downcase] || super(name)
   end
+
+  # TODO: This is only here to support broken Ruby 1.8.x.
+  VERSION = metadata['version']
 
   # Shortcut to create a new Regex::Extractor instance.
   def self.new(*io)

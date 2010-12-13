@@ -1,4 +1,5 @@
-#!mast -x Syckfile bin lib meta qed test [A-Z]*
+#!mast -x Syckfile -x PROFILE .ruby bin lib man qed spec test [A-Z]*
+.ruby
 bin/regex
 lib/regex/command.rb
 lib/regex/extractor.rb
@@ -9,8 +10,7 @@ lib/regex/templates.rb
 lib/regex.rb
 qed/regex.rdoc
 qed/replacer.rdoc
-PROFILE
-PACKAGE
 LICENSE
 README
 HISTORY
+VERSION

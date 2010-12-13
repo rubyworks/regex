@@ -1,7 +1,0 @@
-name    : regex
-date    : 2010-10-10
-version : 1.1.0
-
-requires:
-  - syckle (build)
-  - qed (test)
