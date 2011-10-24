@@ -26,9 +26,9 @@ well. Well that's what you get.
 == USAGE
 
 For detailed explication and examples of usage refer to the
-(User Docs){http://wiki.github.com/rubyworks/regex}, the
-(QED Docs){http://github.com/rubyworks/regex/docs/qed} and the
-(API Docs){http://github.com/rubyworks/regex/docs/api}.
+{User Docs}[http://wiki.github.com/rubyworks/regex], the
+{QED Docs}[http://github.com/rubyworks/regex/docs/qed] and the
+{API Docs}[http://github.com/rubyworks/regex/docs/api].
 
 In brief, usage simply entails supplying a regular expression and a list of files
 to be searched to the +regex+ command.
