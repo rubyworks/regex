@@ -36,9 +36,9 @@ revision: 0
 created: '2006-05-09'
 summary: Regex is a simple commmand-line Regular Expression tool.
 title: Regex
-version: 1.1.0
+version: 1.1.1
 name: regex
 description: ! 'Regex is a simple commmandline Regular Expression tool,
 
-  that makes easy to search documents for content matches.'
+  that makes it easy to search documents for content matches.'
 date: '2011-10-24'

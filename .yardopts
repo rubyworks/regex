@@ -1,6 +1,6 @@
 --title "RegEx"
 --readme README.rdoc
---output-dir site/doc
+--protected
 --private
 lib/**/*.rb
 -
