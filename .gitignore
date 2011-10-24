@@ -6,6 +6,7 @@ man/man1/*.1
 man/man1/*.1.html
 pkg
 tmp
+site/readme.html
 site/docs
 work/sandbox
 QED.rdoc
