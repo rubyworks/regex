@@ -9,6 +9,9 @@ lib/regex/string.rb
 lib/regex/templates.rb
 lib/regex.rb
 lib/regex.yml
+man/man1/regex.1
+man/man1/regex.1.html
+man/man1/regex.1.ronn
 qed/00_intro.rdoc
 qed/cli/applique/env.rb
 qed/cli/replace.rdoc

@@ -1,8 +1,9 @@
-.cache
+.reap/digest
+.yardoc
 log
-ri
+man/man1/*.1
+man/man1/*.html
 pkg
 tmp
 site/docs
 work/sandbox
-

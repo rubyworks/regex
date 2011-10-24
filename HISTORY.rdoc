@@ -1,5 +1,16 @@
 = RELEASE HISTORY
 
+== 1.1.1 / 2011-10-24
+
+Maintenance release updates build configuration. This release
+also adds a man-page.
+
+Changes:
+
+* Modernize build configuration.
+* Add man-page.
+
+
 == 1.1.0 / 2010-10-12
 
 This release adds a detailed output option, and corrects

@@ -1,0 +1,87 @@
+regex(1) - regular expression tool
+==================================
+
+## DESCRIPTION
+
+Regex is a simple commmandline Regular Expression tool, that makes it easy
+to search documents for content matches.
+
+Yea, I know what you are going to say. "I can do that with ____" Fill in the blank
+with +grep+, +awk+, +sed+, +perl+, etc. But honestly, none of these tools are
+as straight forward and capable as one might want. What is needed is a simple
+command-line tool that gives quick access to a Regular Expression engine.
+No more, no less.
+
+Now this could have written this in Perl. No doubt, it would be just as good, if
+not better since Perl's Regualar Expression engine rocks (or so it is said).
+But Ruby's is pretty damn good too, and getting better (with 1.9+). And since
+your humble author knows Ruby very well.... Well that's what you get.
+
+
+## OPTIONS
+
+The `regex` command line has the following options.
+
+  * `-s`, `--search PATTERN` - Search for this pattern.
+
+  * `-t`, `--template NAME` - Use a built-in regular expression (instead of `-s`).
+
+  * `-i`, `--insensitive` - Case insensitive matching.
+
+  * `-m`, `--multiline` - Multiline matching.
+
+  * `-g`, `--global` - Global search. By default regex only searches for the first match.
+    Use the global option to search for all matches.
+
+  * `-n`, `--index INT` - Return a specific match index.
+
+  * `-R`, `--recursive` - Search though subdirectories recursively.
+
+  * `-y`, `--yaml` - Output in YAML format.
+
+  * `-j`, `--json` - Output in JSON format.
+
+  * `-d`, `--detail` - Provide match details.
+
+  * `--[no-]ansi` - Toggle ansi color.
+
+  * `-r`, `--replace TEXT` - Replace matcging pattern with the given text.
+
+  * `--debug` - Run in debug mode.
+
+  * `-h`, `--help` - Display this lovely help message.
+
+
+## OUTPUT
+
+Regex has three output modes. YAML, JSON and standard text. The standard
+text output is unique in that it utilizes special ASCII characters
+to separate matches and regex groups. ASCII 29, called the *record separator*,
+is used to separate repeat matches. ASCII 30, called the *group separator*, is
+is used to separate regular expression groups.
+
+
+## EXAMPLES
+
+The following example returns the content between the first `=begin ... =end`
+clause it comes across.
+
+  $ regex '/=begin.*?\n(.*)\n=end/' sample.rb
+
+Instead of the first argument being the regular expresion, we can use the `-s`
+option. This exampe finds the first line starting with a Q.
+
+  $ regex -s '^Q' sample.txt
+
+This example would replace all words starting with an X with an A in all .txt 
+files in the current directory.
+
+  $ regex -g -s '\bX' -r 'A' *.txt
+
+
+## COPYRIGHTS
+
+Copyright (c) 2009 Thomas Sawyer, Rubyworks
+
+Regex is distributable in accordance with the terms of the BSD-2-Clause license.
+

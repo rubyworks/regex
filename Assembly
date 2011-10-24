@@ -18,8 +18,7 @@ qedoc:
   files: qed/
   title: RegEx Denonstrandum
   output:
-    - SPEC.rdoc
-    - site/spec.html
+    - QED.rdoc
 
 yard:
   priority: 2
@@ -32,3 +31,6 @@ vclog:
     - log/History.rdoc
     - log/Changes.rdoc
 
+# TODO: Add ronn tool
+#ronn:
+#  active: false

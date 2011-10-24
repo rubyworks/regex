@@ -18,8 +18,9 @@ well. Well that's what you get.
 
 == RESOURCES
 
-* Home: http://rubyworks.github.com/regex
-* Code: http://github.com/rubyworks/regex
+* {Home}[http://rubyworks.github.com/regex]
+* {Code}[http://github.com/rubyworks/regex]
+* {Mail}[http://groups.google.com/groups/rubyworks-mailinglist]
 
 
 == USAGE
@@ -81,14 +82,23 @@ Check out the <code>--help</code> and I am sure the rest will be smooth sailing.
 But it you want more information, then do us the good favor of jumping over
 to the wiki[http://wiki.github.com/rubyworks/regex].
 
+
+== OUTPUT
+
+Regex has three output modes. YAML, JSON and standard text. The standard
+text output is unique in that it utilizes special ASCII characters
+to separate matches and regex groups. ASCII 29, called the *record separator*,
+is used to separate repeat matches. ASCII 30, called the *group separator*, is
+is used to separate regular expression groups.
+
+
 == STATUS
 
-This is a very early release. So don't expect every feature under the sun just yet,
-or that every detail is going to work peachy. But hey, if something needs fixing
-or a feature needs adding, well then get in there and send me a patch. Open
-source software is built on *TEAM WORK*, baby.
+The project is maturing but still a touch wet behnd the years. So don't be too surprised if
+it doesn't have every feature under the sun just yet, or that every detail is going to work
+absolutely peachy. But hey, if something needs fixing or a feature needs adding, well then get
+in there and send me a patch. Open source software is built on *TEAM WORK*, right?
 
-Expect a potenial for rapid change here at the beginning.
 
 == COPYRIGHT
 
