@@ -1,44 +1,44 @@
---- 
-name: regex
-repositories: 
-  public: git://github.com/proutils/regex.git
-title: Regex
-requires: 
-- group: 
+---
+source:
+- meta
+authors:
+- name: Thomas Sawyer
+  email: transfire@gmail.com
+- name: Tyler Rick
+copyrights: []
+replacements: []
+alternatives: []
+requirements:
+- name: detroit
+  groups:
   - build
-  name: syckle
-  version: 0+
-- group: 
+  development: true
+- name: qed
+  groups:
   - test
-  name: qed
-  version: 0+
-resources: 
-  download: http://github.com/proutils/regex/downloads
-  mail: http://groups.google.com/group/proutils/topics?hl=en
-  docs: http://wiki.github.com/proutils/regex
-  home: http://proutils.github.com/regex
-  work: http://github.com/proutils/regex
-pom_verison: 1.0.0
-manifest: 
-- .ruby
-- bin/regex
-- lib/regex/command.rb
-- lib/regex/extractor.rb
-- lib/regex/replacer.rb
-- lib/regex/string.rb
-- lib/regex/templates.rb
-- lib/regex.rb
-- lib/regex.yml
-- qed/regex.rdoc
-- qed/replacer.rdoc
-- LICENSE
-- README
-- HISTORY
-- VERSION
+  development: true
+dependencies: []
+conflicts: []
+repositories:
+- uri: git://github.com/proutils/regex.git
+  scm: git
+  name: upstream
+resources:
+  home: http://rubyworks.github.com/regex
+  docs: http://wiki.github.com/rubyworks/regex
+  work: http://github.com/rubyworks/regex
+  download: http://github.com/rubyworks/regex/downloads
+  mail: http://groups.google.com/group/rubyworks-mailinglist
+extra: {}
+load_path:
+- lib
+revision: 0
+created: '2006-05-09'
+summary: Regex is a simple commmand-line Regular Expression tool.
+title: Regex
 version: 1.1.0
-description: Regex is a simple commmandline Regular Expression tool, that makes easy to search documents for content matches.
-summary: Regex is a simple commmandline Regular Expression tool.
-authors: 
-- Thomas Sawyer
-- Tyler Rick
-created: 2006-05-09
+name: regex
+description: ! 'Regex is a simple commmandline Regular Expression tool,
+
+  that makes easy to search documents for content matches.'
+date: '2011-10-24'

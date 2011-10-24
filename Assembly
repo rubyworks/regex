@@ -1,0 +1,34 @@
+---
+email:
+  mailto:
+    - ruby-talk@ruby-lang.org
+    - rubyworks-mailinglist@googlegroups.com
+
+gem:
+  active: true
+
+github:
+  active: true
+
+qed:
+  files: qed/
+  active: true
+
+qedoc:
+  files: qed/
+  title: RegEx Denonstrandum
+  output:
+    - SPEC.rdoc
+    - site/spec.html
+
+yard:
+  priority: 2
+
+dnote:
+  output: log/NOTES.rdoc
+
+vclog:
+  output:
+    - log/History.rdoc
+    - log/Changes.rdoc
+

@@ -1,16 +1,19 @@
-#!mast -x Syckfile -x PROFILE .ruby bin lib man qed spec test [A-Z]*
+#!mast .ruby .yardopts bin lib man qed spec test [A-Z]*.*
 .ruby
+.yardopts
 bin/regex
 lib/regex/command.rb
 lib/regex/extractor.rb
-lib/regex/package.yml
 lib/regex/replacer.rb
 lib/regex/string.rb
 lib/regex/templates.rb
 lib/regex.rb
+lib/regex.yml
+qed/cli/applique/env.rb
+qed/cli/replace.rdoc
+qed/cli/search.rdoc
 qed/regex.rdoc
 qed/replacer.rdoc
-LICENSE
-README
-HISTORY
-VERSION
+HISTORY.rdoc
+README.rdoc
+COPYING.rdoc
