@@ -22,6 +22,8 @@ your humble author knows Ruby very well.... Well that's what you get.
 
 The `regex` command line has the following options.
 
+### Search Options
+
   * `-s`, `--search PATTERN` - Search for this pattern.
 
   * `-t`, `--template NAME` - Use a built-in regular expression (instead of `-s`).
@@ -30,8 +32,10 @@ The `regex` command line has the following options.
 
   * `-m`, `--multiline` - Multiline matching.
 
-  * `-g`, `--global` - Global search. By default regex only searches for the first match.
-    Use the global option to search for all matches.
+  * `-g`, `--global` - Global search. By default regex only searches for the
+     first match. Use the global option to search for all matches.
+
+  * `-e`, '--escape' - Make all patterns verbatim string matchers.
 
   * `-n`, `--index INT` - Return a specific match index.
 
@@ -43,9 +47,15 @@ The `regex` command line has the following options.
 
   * `-d`, `--detail` - Provide match details.
 
-  * `--[no-]ansi` - Toggle ansi color.
+### Replace Options
 
-  * `-r`, `--replace TEXT` - Replace matcging pattern with the given text.
+  * `-r`, `--replace TEXT` - Replace matching pattern with the given text.
+
+  * `-b`, `--backup` - Backup any files that are changed.
+
+### Special Options
+
+  * `--[no-]ansi` - Toggle ansi color.
 
   * `--debug` - Run in debug mode.
 
