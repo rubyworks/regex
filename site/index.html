@@ -14,10 +14,11 @@
 
   <SCRIPT type="text/javascript">
     $(document).ready(function() {
-      $('#readme').load('readme.html');
-      $('pre').wrapInner('<code></code>');
-      hljs.tabReplace = '    ';
-      hljs.initHighlightingOnLoad('ruby');
+      $('#readme').load('readme.html', function(){
+        $('pre').wrapInner('<code></code>');
+        hljs.tabReplace = '    ';
+        hljs.initHighlightingOnLoad('ruby');
+      });
     });
   </SCRIPT>
 
