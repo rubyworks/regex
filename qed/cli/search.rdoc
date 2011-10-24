@@ -27,5 +27,5 @@ Invoking the command:
 
 Will give a more complex result.
 
-  @out.assert == "example\u001E\nexample\n"
+  @out.assert == "example\036\nexample\n"
 
