@@ -41,6 +41,9 @@ module Regex
     # Select built-in regular expression by name.
     attr_accessor :template
 
+    # Is a recusive serach?
+    attr_accessor :recursive
+
     # Index of expression return.
     attr_accessor :index
 
@@ -53,7 +56,7 @@ module Regex
     # Escape expression.
     attr_accessor :escape
 
-    # Repeat Match.
+    # Repeat Match (global).
     attr_accessor :repeat
 
     # Output format.
@@ -281,9 +284,14 @@ module Regex
     def scan
       list = []
       io.each do |input|
-        text = read(input)
-        text.scan(regex) do
-          list << Match.new(input, $~)
+        # TODO: limit to text files, how?
+        begin
+          text = read(input)
+          text.scan(regex) do
+            list << Match.new(input, $~)
+          end
+        rescue => err
+          warn(input.inspect + ' ' + err.to_s) if $VERBOSE
         end
       end
       list
@@ -332,6 +340,9 @@ module Regex
         end
         opt.on('--search', '-s PATTERN', "search for regular expression") do |re|
           options[:pattern] = re
+        end
+        opt.on('--recursive', '-R', 'search recursively though subdirectories') do
+          options[:recursive] = true
         end
         opt.on('--index', '-n INT', "return a specific match index") do |int|
           options[:index] = int.to_i
@@ -387,11 +398,17 @@ module Regex
         end
       end
 
-      files = argv
-
-      files.each do |file|
-        if !File.file?(file)
-          $stderr.puts "No such file -- '#{file}'."
+      files = []
+      argv.each do |file|
+        if File.directory?(file)
+          if options[:recursive]
+            rec_files = Dir[File.join(file, '**')].reject{ |d| File.directory?(d) }
+            files.concat(rec_files)
+          end
+        elsif File.file?(file)
+          files << file
+        else
+          $stderr.puts "Not a file -- '#{file}'."
           exit 1
         end
       end

@@ -1,4 +1,5 @@
 require 'stringio'
+require 'optparse'
 
 module Regex
 
@@ -7,6 +8,9 @@ module Regex
 
     # Array of [search, replace] rules.
     attr_reader :rules
+
+    # Is this a recursive search?
+    attr_accessor :recursive
 
     # Make all patterns exact string matchers.
     attr_accessor :escape
@@ -22,6 +26,9 @@ module Regex
 
     # Make backups of files when they change.
     attr_accessor :backup
+
+    # Interactive replacement.
+    attr_accessor :interactive
 
     #
     def initialize(options={})
@@ -40,16 +47,34 @@ module Regex
     def apply(*ios)
       ios.each do |io|
         original = (IO === io || StringIO === io ? io.read : io.to_s)
-        generate = original
+        generate = original.to_s
         rules.each do |(pattern, replacement)|
-          if pattern.global
-            generate = generate.gsub(pattern.to_re, replacement)
-          else
-            generate = generate.sub(pattern.to_re, replacement)
+          begin
+            if pattern.global
+              generate = generate.gsub(pattern.to_re, replacement)
+            else
+              generate = generate.sub(pattern.to_re, replacement)
+            end
+          rescue => err
+            warn(io.inspect + ' ' + err.to_s) if $VERBOSE
           end
         end
         if original != generate
           write(io, generate)
+        end
+      end
+    end
+
+    #
+    # TODO: interactive mode needs to handle \1 style substitutions.
+    def interactive_gsub(string, pattern, replacement)
+      copy = string.dup
+      string.scan(pattern) do |match|
+        print "#{match} ? (Y/n)"
+        case ask
+        when 'y', 'Y', ''
+          copy[$~.begin(0)..$~.end(0)] = replacement
+        else
         end
       end
     end
@@ -92,7 +117,7 @@ module Regex
       replaces = []
       options = {}
       parser = OptionParser.new do |opt|
-        opt.on('--subtitute', '-s PATTERN', 'search portion of substitution') do |search|
+        opt.on('--search', '-s PATTERN', 'search portion of substitution') do |search|
           searches << search
         end
         opt.on('--template', '-t NAME', 'search for built-in regular expression') do |name|
@@ -101,7 +126,10 @@ module Regex
         opt.on('--replace', '-r STRING', 'replacement string of substitution') do |replace|
           replaces << replace
         end
-        opt.on('--escape', '-e', 'make all patterns exact string matchers') do
+        opt.on('--recursive', '-R', 'search recursively though subdirectories') do
+          options[:recursive] = true
+        end
+        opt.on('--escape', '-e', 'make all patterns verbatim string matchers') do
           options[:escape] = true
         end
         opt.on('--insensitive', '-i', 'make all patterns case-insensitive matchers') do
@@ -119,7 +147,10 @@ module Regex
         opt.on('-b', '--backup', 'backup any files that are changed') do
           options[:backup] = true
         end
-        opt.on_tail('--debug', 'run in debug mode') do
+        opt.on('-i', '--interactive', 'interactive mode') do
+          options[:interactive] = true
+        end
+         opt.on_tail('--debug', 'run in debug mode') do
           $DEBUG = true
         end
         opt.on_tail('--help', '-h', 'display this lovely help message') do
@@ -129,10 +160,19 @@ module Regex
       end
       parser.parse!(argv)
 
-      files = argv
-      files.each do |file|
+      files = []
+
+      argv.each{ |file|
         raise "file does not exist -- #{file}" unless File.exist?(file)
-      end
+        if File.directory?(file)
+          if options[:recursive] 
+            files.concat Dir[File.join(file, '**')].reject{ |d| File.directory?(d) }
+          end
+        else
+          files << file
+        end
+      }
+
       targets = files.empty? ? [ARGF] : files.map{ |f| File.new(f) }
 
       unless searches.size == replaces.size
