@@ -11,7 +11,7 @@ with +grep+, +awk+, +sed+, +perl+, etc. But honestly, none of these tools are
 gives me quick access to a Regular Expression engine. No more, no less.
 
 Now I could have written this in Perl. I'm sure it would just as good, if not
-better since Perl's Regualar Expression engine rocks, or so I hear. But Ruby's is
+better since Perl's Regular Expression engine rocks, or so I hear. But Ruby's is
 pretty damn good too, and getting better (with 1.9+). And since I know Ruby very
 well. Well that's what you get.
 
@@ -74,7 +74,7 @@ To replace text, use the <code>--replace/--r</code> option.
 
   $ regex --yaml --repeat -s 'Tom' -r 'Bob' sample.rb
 
-This will replace every occurance of "Tom" with "Bob" in the <code>sample.rb</code>
+This will replace every occurrence of "Tom" with "Bob" in the <code>sample.rb</code>
 file. By default <code>regex</code> will backup any file it changes by adding a
 <code>.bak</code> extension to the original copy.
 
@@ -94,17 +94,18 @@ is used to separate regular expression groups.
 
 == STATUS
 
-The project is maturing but still a touch wet behnd the years. So don't be too surprised if
-it doesn't have every feature under the sun just yet, or that every detail is going to work
-absolutely peachy. But hey, if something needs fixing or a feature needs adding, well then get
-in there and send me a patch. Open source software is built on *TEAM WORK*, right?
+The project is maturing but still a touch wet behind the ears. So don't be too
+surprised if it doesn't have every feature under the sun just yet, or that every
+detail is going to work absolutely peachy. But hey, if something needs fixing or
+a feature needs adding, well then get in there and send me a patch. Open source
+software is built on *TEAM WORK*, right?
 
 
 == COPYRIGHT
 
 Copyright (c) 2010 Thomas Sawyer
 
-Regex is licensed under the terms of the Apache License, Version 2.0.
+Regex is licensed under the terms of the *FreeBSD* license.
 
 See COPYING.rdoc file for details.
 
