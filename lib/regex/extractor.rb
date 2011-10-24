@@ -16,6 +16,9 @@ module Regex
     # the record deliminator. This is the default value.
     DELIMINATOR_RECORD = 30.chr + "\n"
 
+    # TODO: Separate by file ?
+    # DELIMINATOR_FILE = 28.chr +" \n"
+
     #
     def self.input_cache(input)
       @input_cache ||= {}
@@ -266,7 +269,7 @@ module Regex
 
     # Structure the matchdata for single match.
     def structure_single
-      structure_repeat.first
+      structure_repeat.first || []
     end
 
     # Structure the matchdata for repeat matches.
