@@ -1,4 +1,4 @@
-= Search and Replace
+== Regex::Replacer
 
 Regex can also be used to do search and replace across multiple
 strings or IO objects, includeing files.
@@ -47,7 +47,7 @@ objects in general, so long as they they can be reopended for writing.
 
 If +io+ were a File object, rather than a StringIO, the file would
 be changed on disk. As a precaution a backup file can be written 
-with then name of file plus a '.bak' extension in the same directory as
+with the name of file plus a '.bak' extension in the same directory as
 the file. To turn on the backup option, either supply it as an option
 to the constructor, or set it via the writer method.
 

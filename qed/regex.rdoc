@@ -1,10 +1,9 @@
-= Regex class
+== Regex class
 
-Regex is really mean to be used on the commandline
-since it is really nothing more than a front end
-to Ruby's regular expression engine. But we will 
-demonstrate it's use in code just the same, and to
-help ensure code quality.
+Regex is really meant to be used on the command-line since
+it is really nothing more than a front end to Ruby's regular
+expression engine. But we will demonstrate it's use here in
+code just the same, and to help ensure code quality.
 
 First we need to require the Regex library.
 
