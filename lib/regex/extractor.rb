@@ -347,6 +347,9 @@ module Regex
         opt.on('--recursive', '-R', 'search recursively though subdirectories') do
           options[:recursive] = true
         end
+        opt.on('--escape', '-e', 'make all patterns verbatim string matchers') do
+          options[:escape] = true
+        end
         opt.on('--index', '-n INT', "return a specific match index") do |int|
           options[:index] = int.to_i
         end
