@@ -1,7 +1,8 @@
---title "Tap Out"
+--title "RegEx"
 --readme README.rdoc
 --output-dir site/doc
 --private
-lib/**/*.rb -
-[A-Z][A-Z]*
+lib/**/*.rb
+-
+[A-Z]*.*
 
