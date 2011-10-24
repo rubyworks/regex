@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.7.3 (http://github.com/rtomayko/ronn/tree/0.7.3)'>
+  <title>regex(1) - regular expression tool</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#OPTIONS">OPTIONS</a>
+    <a href="#OUTPUT">OUTPUT</a>
+    <a href="#EXAMPLES">EXAMPLES</a>
+    <a href="#COPYRIGHTS">COPYRIGHTS</a>
+    </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>regex(1)</li>
+    <li class='tc'></li>
+    <li class='tr'>regex(1)</li>
+  </ol>
+
+  <h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>regex</code> - <span class="man-whatis">regular expression tool</span>
+</p>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>Regex is a simple commmandline Regular Expression tool, that makes it easy
+to search documents for content matches.</p>
+
+<p>Yea, I know what you are going to say. "I can do that with ____" Fill in the blank
+with +grep+, +awk+, +sed+, +perl+, etc. But honestly, none of these tools are
+as straight forward and capable as one might want. What is needed is a simple
+command-line tool that gives quick access to a Regular Expression engine.
+No more, no less.</p>
+
+<p>Now this could have written this in Perl. No doubt, it would be just as good, if
+not better since Perl's Regualar Expression engine rocks (or so it is said).
+But Ruby's is pretty damn good too, and getting better (with 1.9+). And since
+your humble author knows Ruby very well.... Well that's what you get.</p>
+
+<h2 id="OPTIONS">OPTIONS</h2>
+
+<p>The <code>regex</code> command line has the following options.</p>
+
+<h3 id="Search-Options">Search Options</h3>
+
+<ul>
+<li><p><code>-s</code>, <code>--search PATTERN</code> - Search for this pattern.</p></li>
+<li><p><code>-t</code>, <code>--template NAME</code> - Use a built-in regular expression (instead of <code>-s</code>).</p></li>
+<li><p><code>-i</code>, <code>--insensitive</code> - Case insensitive matching.</p></li>
+<li><p><code>-m</code>, <code>--multiline</code> - Multiline matching.</p></li>
+<li><p><code>-g</code>, <code>--global</code> - Global search. By default regex only searches for the
+ first match. Use the global option to search for all matches.</p></li>
+<li><p><code>-e</code>, '--escape' - Make all patterns verbatim string matchers.</p></li>
+<li><p><code>-n</code>, <code>--index INT</code> - Return a specific match index.</p></li>
+<li><p><code>-R</code>, <code>--recursive</code> - Search though subdirectories recursively.</p></li>
+<li><p><code>-y</code>, <code>--yaml</code> - Output in YAML format.</p></li>
+<li><p><code>-j</code>, <code>--json</code> - Output in JSON format.</p></li>
+<li><p><code>-d</code>, <code>--detail</code> - Provide match details.</p></li>
+</ul>
+
+
+<h3 id="Replace-Options">Replace Options</h3>
+
+<ul>
+<li><p><code>-r</code>, <code>--replace TEXT</code> - Replace matching pattern with the given text.</p></li>
+<li><p><code>-b</code>, <code>--backup</code> - Backup any files that are changed.</p></li>
+</ul>
+
+
+<h3 id="Special-Options">Special Options</h3>
+
+<ul>
+<li><p><code>--[no-]ansi</code> - Toggle ansi color.</p></li>
+<li><p><code>--debug</code> - Run in debug mode.</p></li>
+<li><p><code>-h</code>, <code>--help</code> - Display this lovely help message.</p></li>
+</ul>
+
+
+<h2 id="OUTPUT">OUTPUT</h2>
+
+<p>Regex has three output modes. YAML, JSON and standard text. The standard
+text output is unique in that it utilizes special ASCII characters
+to separate matches and regex groups. ASCII 29, called the <em>record separator</em>,
+is used to separate repeat matches. ASCII 30, called the <em>group separator</em>, is
+is used to separate regular expression groups.</p>
+
+<h2 id="EXAMPLES">EXAMPLES</h2>
+
+<p>The following example returns the content between the first <code>=begin ... =end</code>
+clause it comes across.</p>
+
+<p>  $ regex '/=begin.<em>?\n(.</em>)\n=end/' sample.rb</p>
+
+<p>Instead of the first argument being the regular expresion, we can use the <code>-s</code>
+option. This exampe finds the first line starting with a Q.</p>
+
+<p>  $ regex -s '<sup>Q'</sup> sample.txt</p>
+
+<p>This example would replace all words starting with an X with an A in all .txt
+files in the current directory.</p>
+
+<p>  $ regex -g -s '\bX' -r 'A' *.txt</p>
+
+<h2 id="COPYRIGHTS">COPYRIGHTS</h2>
+
+<p>Copyright (c) 2009 Thomas Sawyer, Rubyworks</p>
+
+<p>Regex is distributable in accordance with the terms of the BSD-2-Clause license.</p>
+
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'></li>
+    <li class='tc'>October 2011</li>
+    <li class='tr'>regex(1)</li>
+  </ol>
+
+  </div>
+</body>
+</html>
