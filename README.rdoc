@@ -64,7 +64,7 @@ In this case the returned matches are delimited using as an array of arrays.
 To get more information that just the match results use the <code>--detail/-d</code>
 option.
 
-Also, we can do without the the <code>/ /<code> deliminators on the regular
+Also, we can do without the the <code>/ /</code> deliminators on the regular
 expression if we use the <code>--search/-s</code> option instead. Going back to
 our first example:
 
