@@ -8,14 +8,14 @@ gem:
   active: true
 
 github:
-  active: true
+  gh_pages: web
 
 qed:
-  files: qed/
+  files: qed
   active: true
 
 qedoc:
-  files: qed/
+  files: qed
   title: RegEx Denonstrandum
   output:
     - QED.rdoc
@@ -24,13 +24,13 @@ yard:
   priority: 2
 
 dnote:
-  output: log/NOTES.rdoc
+  output: log/notes.html
 
 vclog:
   output:
-    - log/History.rdoc
-    - log/Changes.rdoc
+    - log/history.html
+    - log/changes.html
 
-# TODO: Add ronn tool
 #ronn:
-#  active: false
+#  active: true
+

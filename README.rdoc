@@ -1,6 +1,12 @@
-= Regex
+= Regex ("Like a Knife")
 
-("Like a Knife")
+{Homepage}[http://rubyworks.github.com/regex] |
+{Source Code}[http://github.com/rubyworks/regex] |
+{Mailing List}[http://groups.google.com/groups/rubyworks-mailinglist] |
+<a href="irc://irc.freenode.net/rubyworks">Chat Room</a>
+
+
+{<img src="http://travis-ci.org/rubyworks/regex.png" />}[http://travis-ci.org/rubyworks/regex]
 
 
 == DESCRIPTION
@@ -14,13 +20,6 @@ Now I could have written this in Perl. I'm sure it would just as good, if not
 better since Perl's Regular Expression engine rocks, or so I hear. But Ruby's is
 pretty damn good too, and getting better (with 1.9+). And since I know Ruby very
 well. Well that's what you get.
-
-
-== RESOURCES
-
-* {Home}[http://rubyworks.github.com/regex]
-* {Code}[http://github.com/rubyworks/regex]
-* {Mail}[http://groups.google.com/groups/rubyworks-mailinglist]
 
 
 == USAGE
