@@ -1,6 +1,6 @@
 ---
 source:
-- meta
+- var
 authors:
 - name: Thomas Sawyer
   email: transfire@gmail.com
@@ -40,4 +40,4 @@ name: regex
 description: ! 'Regex is a simple commmand-line Regular Expression tool
 
   that makes it easy to search documents for content matches.'
-date: '2011-10-24'
+date: '2011-11-11'
