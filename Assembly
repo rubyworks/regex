@@ -24,6 +24,7 @@ yard:
   priority: 2
 
 dnote:
+  title: Developer's Notes
   output: log/notes.html
 
 vclog:
