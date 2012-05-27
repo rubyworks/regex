@@ -11,14 +11,13 @@ github:
   gh_pages: web
 
 qed:
-  files: qed
-  active: true
+  files: demo
 
 qedoc:
-  files: qed
-  title: RegEx Denonstrandum
+  files: demo
+  title: RegEx Denonstration
   output:
-    - QED.rdoc
+    - DEMO.rdoc
 
 yard:
   priority: 2
