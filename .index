@@ -1,37 +1,47 @@
 ---
-source:
+revision: 2013
+type: ruby
+sources:
 - var
 authors:
 - name: Thomas Sawyer
   email: transfire@gmail.com
 - name: Tyler Rick
-copyrights: []
-replacements: []
-alternatives: []
+organizations: []
 requirements:
-- name: detroit
-  groups:
+- groups:
   - build
   development: true
-- name: qed
-  groups:
+  name: detroit
+- groups:
   - test
   development: true
-dependencies: []
+  name: qed
 conflicts: []
-repositories:
-- uri: git://github.com/proutils/regex.git
-  scm: git
-  name: upstream
+alternatives: []
 resources:
-  Website: http://rubyworks.github.com/regex
-  User Guide: http://wiki.github.com/rubyworks/regex
-  Source Code: http://github.com/rubyworks/regex
-  Mailing List: http://groups.google.com/group/rubyworks-mailinglist
-extra: {}
-load_path:
-- lib
-revision: 0
+- type: home
+  uri: http://rubyworks.github.com/regex
+  label: Homepage
+- type: wiki
+  uri: http://wiki.github.com/rubyworks/regex
+  label: User Guide
+- type: code
+  uri: http://github.com/rubyworks/regex
+  label: Source Code
+- type: mail
+  uri: http://groups.google.com/group/rubyworks-mailinglist
+  label: Mailing List
+repositories:
+- name: upstream
+  scm: git
+  uri: git://github.com/proutils/regex.git
+categories: []
+copyrights: []
+customs: []
+paths:
+  lib:
+  - lib
 created: '2006-05-09'
 summary: Regex is a simple commmand-line Regular Expression tool.
 title: Regex
@@ -40,4 +50,4 @@ name: regex
 description: ! 'Regex is a simple commmand-line Regular Expression tool
 
   that makes it easy to search documents for content matches.'
-date: '2011-11-11'
+date: '2013-01-30'
