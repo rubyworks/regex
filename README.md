@@ -21,7 +21,7 @@ pretty damn good too, and getting better (with 1.9+). And since I know Ruby very
 well. Well that's what you get.
 
 
-## USAGE
+## Usage
 
 For detailed explication and examples of usage refer to the
 [User Docs](http://wiki.github.com/rubyworks/regex), the
@@ -82,7 +82,7 @@ to the [wiki](http://wiki.github.com/rubyworks/regex). Feel free to add
 additional information there to help others.
 
 
-## OUTPUT
+## Output
 
 Regex has three output modes. YAML, JSON and standard text. The standard
 text output is unique in that it utilizes special ASCII characters
@@ -91,7 +91,7 @@ is used to separate repeat matches. ASCII 30, called the *group separator*, is
 is used to separate regular expression groups.
 
 
-## STATUS
+## Status
 
 The project is maturing but still a touch wet behind the ears. So don't be too
 surprised if it doesn't have every feature under the sun just yet, or that every
@@ -100,7 +100,7 @@ a feature needs adding, well then get in there and send me a patch. Open source
 software is built on *TEAM WORK*, right?
 
 
-## COPYRIGHT
+## Copyrights
 
 Copyright &copy; 2010 Rubyworks
 
