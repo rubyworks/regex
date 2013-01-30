@@ -1,6 +1,6 @@
-= RELEASE HISTORY
+# RELEASE HISTORY
 
-== 1.1.1 / 2011-10-24
+## 1.1.1 / 2011-10-24
 
 Maintenance release updates build configuration. This release
 also adds a man-page and fixes one bug with single search output.
@@ -12,7 +12,7 @@ Changes:
 * Add man-page for help.
 
 
-== 1.1.0 / 2010-10-12
+## 1.1.0 / 2010-10-12
 
 This release adds a detailed output option, and corrects
 a bug when using `--escape` with search and replace. It also
@@ -29,7 +29,7 @@ Changes:
 * Deprecate `--unxml` option until implementation can be worked out.
 
 
-== 1.0.0 / 2010-02-10
+## 1.0.0 / 2010-02-10
 
 Initial release of Regex. Regex is a simple
 commandline Regular Expression tool.

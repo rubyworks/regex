@@ -1,7 +1,12 @@
-#!mast .ruby .yardopts bin lib man qed spec test [A-Z]*.*
-.ruby
+#!mast .index .yardopts bin demo lib man spec test *.md *.txt
+.index
 .yardopts
 bin/regex
+demo/api/01_regex.md
+demo/api/02_replacer.md
+demo/cli/01_search.md
+demo/cli/02_replace.md
+demo/cli/applique/env.rb
 lib/regex/command.rb
 lib/regex/extractor.rb
 lib/regex/replacer.rb
@@ -12,12 +17,6 @@ lib/regex.yml
 man/man1/regex.1
 man/man1/regex.1.html
 man/man1/regex.1.ronn
-qed/00_intro.rdoc
-qed/cli/applique/env.rb
-qed/cli/replace.rdoc
-qed/cli/search.rdoc
-qed/regex.rdoc
-qed/replacer.rdoc
-HISTORY.rdoc
-README.rdoc
-COPYING.rdoc
+HISTORY.md
+README.md
+LICENSE.txt
